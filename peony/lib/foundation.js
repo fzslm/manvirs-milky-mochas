@@ -18,6 +18,7 @@ var _f = {
 				"money": 1000,
 				"level": 1,
 				"shop": [],
+				"shopWidth": 2560,
 				"unlockedItems": [
 					{
 						"id": 1,
