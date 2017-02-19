@@ -37,7 +37,7 @@ var _f = {
 		start: function(){
 			_f.window.scaleUx(); // scale the UI to fit the screen
 			// let's draw a loading wheel on the screen first!
-			$('.content').append('<div class="game-loading">Loading</div>');
+			$('.content').append('<div class="game-loading"><i class="fa fa-cog fa-spin"></i> Loading</div>');
 			// check for user's save game
 			fs.exists('peony/save.json', function(res){
 				if(!res){
