@@ -17,7 +17,7 @@ html, body {
     max-width: 1920px;
     min-width: 1920px;
     z-index: 10000;
-    overflow-x: overlay;
+    overflow-x: hidden;
     overflow-y: hidden;
 }
 
