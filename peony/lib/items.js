@@ -3,14 +3,27 @@ var itemDefinitions = [
 		"name": "Chair",
 		"description": "A simple wooden chair. Patrons can sit on them while they eat and drink.",
 		"price": 100,
-		"maxLevel": 1,
 		"canNPCInteract": true,
 		"interaction": function() {
 			alert('hi!');
 		},
 		"state": "vacant",
 		"dimensions": [274,340],
-		"position": [512,640]
+		"position": [512,640],
+		"image": "assets/chair.png"
+	},
+	{
+		"name": "Table",
+		"description": "A simple table. Customers can put their food and drinks on here.",
+		"price": 150,
+		"canNPCInteract": true,
+		"interaction": function() {
+			alert('table interacted with');
+		},
+		"state": "empty",
+		"dimensions": [540, 394],
+		"position": [760,270],
+
 	}
 ];
 
