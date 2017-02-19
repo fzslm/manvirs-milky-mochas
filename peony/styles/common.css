@@ -21,15 +21,6 @@ html, body {
     overflow-y: hidden;
 }
 
-.canvasContainer {
-	z-index: 1;
-	max-height: 1080px;
-	min-height: 1080px;
-	max-width: 1920px;
-	min-width: 1920px;
-	position: fixed;
-}
-
 .modalContainer {
 	min-height: 100%;
 	vertical-align: middle;
