@@ -119,10 +119,15 @@ var _f = {
 				// tray is closed, open it
 				$('.tray').attr('closed', 'false');
 				$('#trayButton').css('background', "url('assets/common/back.png')");
+				$('.trayContainer').show();
+				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'show'});
 			} else {
 				// tray is open, close it
 				$('.tray').attr('closed', 'true');
 				$('#trayButton').css('background', "url('assets/common/addItem.png')");
+				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, function(){
+					$('.trayContainer').hide();
+				});
 			}
 		}
 	},

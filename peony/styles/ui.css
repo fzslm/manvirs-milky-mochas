@@ -89,6 +89,10 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=te
 	z-index: 99999999; /* TODO: Make this a more appropriate number!!! */
 }
 
+.trayContainer {
+	z-index: 99999999; /* TODO: Make this a more appropriate number!!! */
+}
+
 ul.modal-actions {
 	position: absolute;
     bottom: 24px; /* looks prettier */
@@ -129,4 +133,13 @@ li.modal-action {
 .imageButton {
 	background: no-repeat scroll 0 0 transparent; position: fixed;
 	width: 138px; height: 138px;
+}
+
+.tray {
+	background-color: rgba(0,0,0,0.7);
+    width: 1920px;
+    height: 1080px;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
