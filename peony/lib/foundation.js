@@ -110,6 +110,14 @@ var _f = {
 
 	},
 
+	game: {
+		updateName: function(name) {
+			// sets the user's name
+			gameSave.playerName = name;
+			_f.system.save();
+		}
+	},
+
 	misc: {
 		clock: function() {
 			/* returns the present time. */
