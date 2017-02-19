@@ -116,6 +116,18 @@ var _f = {
 			// sets the user's name
 			gameSave.playerName = name;
 			_f.system.save();
+		},
+
+		toggleTray: function() {
+			if($('.tray').attr('closed') == "true") {
+				// tray is closed, open it
+				$('.tray').attr('closed', 'false');
+				$('#trayButton').css('background', "url('assets/common/back.png')");
+			} else {
+				// tray is open, close it
+				$('.tray').attr('closed', 'true');
+				$('#trayButton').css('background', "url('assets/common/addItem.png')");
+			}
 		}
 	},
 

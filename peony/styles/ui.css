@@ -125,3 +125,8 @@ li.modal-action {
     max-width: 1920px;
     min-width: 1920px;
 }
+
+.imageButton {
+	background: no-repeat scroll 0 0 transparent; position: fixed;
+	width: 138px; height: 138px;
+}
