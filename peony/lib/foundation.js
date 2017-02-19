@@ -5,18 +5,18 @@ var _f = {
 	system: {
 
 		loadSave: function() {
-			_l('Loading game...');
+			console.log('Loading game...');
 			gameSave = jsonfile.readFileSync('peony/save.json');
 		},
 
 		newSave: function() {
-			_l('Creating new save...');
+			console.log('Creating new save...');
 			gameSave = {};
 			jsonfile.writeFileSync('peony/save.json', gameSave);
 		},
 
 		save: function() {
-			_l('Saving game...');
+			console.log('Saving game...');
 			jsonfile.writeFileSync('peony/save.json', gameSave);
 		},
 
@@ -35,12 +35,13 @@ var _f = {
 				}
 			});
 
+
 			return true;
 		},
 
 		loadError: function(errorNumber){
 			// an unrecoverable error occurred during startup...
-			_l('An unrecoverable error occurred during startup. ('+errorNumber+')');
+			console.log('An unrecoverable error occurred during startup. ('+errorNumber+')');
 			_f.ui.modal.push('An error occurred', 'A critical error occurred while trying to start the game. Please contact the developer. ('+errorNumber+')', [
 				{
 					"name": "Quit",
