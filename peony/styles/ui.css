@@ -139,7 +139,14 @@ li.modal-action {
 	background-color: rgba(0,0,0,0.7);
     width: 1920px;
     height: 1080px;
-    position: fixed;
-    top: 0;
-    left: 0;
+}
+
+.trayContainer {
+	min-height: 100%;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 100%;
+	position: fixed;
 }
