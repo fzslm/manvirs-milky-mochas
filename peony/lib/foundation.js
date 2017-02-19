@@ -148,10 +148,46 @@ var _f = {
 		},
 
 		purchaseItem: function(id) {
-			alert('Thank you!');
 			$('.buyButton').remove();
 			_f.game.toggleTray();
-			new Item(id);
+			gameSave.shop.push(new Item(id));
+			_f.game.changeMoney(-itemDefinitions[id].price);
+			_f.system.save();
+		},
+
+		destroyItem: function(uuid){
+			$('#item-'+uuid).remove();
+			var newShopArray = [];
+			gameSave.shop.forEach(function(res){
+				if(res.uuid != uuid) {
+					newShopArray.push(res);
+				}
+			});
+			gameSave.shop = newShopArray;
+			_f.system.save();
+		},
+
+		sellItem: function(uuid) {
+			var itemReference = _f.game.getItemFromUUID(uuid);
+			console.log(itemReference);
+			_f.game.changeMoney((itemReference.price / 4 ) * 3);
+			_f.game.destroyItem(uuid);
+		},
+
+		changeMoney: function(amount) {
+			console.log('changing by '+amount);
+			gameSave.money = gameSave.money + amount;
+			_f.system.save();
+		},
+
+		getItemFromUUID: function(uuid) {
+			var returnValue = false;
+			gameSave.shop.forEach(function(res){
+				if(res.uuid == uuid) {
+					returnValue = res;
+				}
+			});
+			return returnValue;
 		}
 	},
 

@@ -1,1 +1,1 @@
-{"playerName":"fzslm","shopName":"","started":true,"money":1000,"level":1,"shop":[],"shopWidth":2560,"unlockedItems":[{"id":1,"progress":100}]}
+{"playerName":"Faiz","shopName":"","started":true,"money":900,"level":1,"shop":[{"name":"Table","description":"A simple table. Customers can put their food and drinks on here.","price":150,"canNPCInteract":true,"state":"empty","image":"assets/table.png","dimensions":[540,394],"position":[760,270],"id":1,"uuid":"b14ff3ee-a590-42d4-a274-4715ee21d1e7"}],"shopWidth":2560,"unlockedItems":[{"id":1,"progress":100}]}

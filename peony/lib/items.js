@@ -33,15 +33,20 @@ function Item(id) {
 	this.price = itemDefinitions[id].price;
 	this.maxLevel = itemDefinitions[id].maxLevel;
 	this.canNPCInteract = itemDefinitions[id].canNPCInteract;
-	this.interaction = itemDefinitions[id].interaction;
 	this.state = itemDefinitions[id].state;
 	this.image = itemDefinitions[id].image;
 	this.dimensions = itemDefinitions[id].dimensions;
 	this.position = itemDefinitions[id].position;
+	this.id = id;
 	this.uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 	    return v.toString(16);
 	});
+
+	this.destroy = function(){_f.game.destroyItem(this.uuid);};
+	this.sell = function(){_f.game.sellItem(this.uuid);};
+	this.interaction = itemDefinitions[id].interaction;
+
 
 	$('.viewContent').append('<div class="item" style="width: '+this.dimensions[0]+'px; height: '+this.dimensions[1]+'px; top: '+this.position[1]+'px; left: '+this.position[0]+'px; position: relative; background: url(\''+this.image+'\')" id="item-'+this.uuid+'"></div>');
 

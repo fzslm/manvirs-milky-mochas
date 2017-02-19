@@ -16,6 +16,14 @@ $('.viewContent').css('min-width', gameSave.shopWidth+widthPost+widthPre+'px');
 $('.viewContent').css('max-width', gameSave.shopWidth+widthPost+widthPre+'px');
 $('.viewContent').css('background-position-x', widthPre+'px');
 
+gameSave.shop.forEach(function(res){
+	$('.viewContent').append('<div class="item" style="width: '+res.dimensions[0]+'px; height: '+res.dimensions[1]+'px; top: '+res.position[1]+'px; left: '+res.position[0]+'px; position: relative; background: url(\''+res.image+'\')" id="item-'+res.uuid+'"></div>');
+
+	res.destroy = function(){_f.game.destroyItem(this.uuid);};
+	res.interaction = itemDefinitions[res.id].interaction;
+	res.sell = function(){_f.game.sellItem(this.uuid);};
+
+});
 
 $('.content').mousewheel(function(e, delta) {
     $(this).scrollLeft(this.scrollLeft + (-delta * 40));
@@ -31,13 +39,16 @@ $('li').on('click', function(res) {
 
 
 $(document).on("contextmenu", ".item", function(e){
+
+	var itemReference = _f.game.getItemFromUUID(e.target.id.substring(5));
+	var sellPrice = (itemReference.price / 4 )* 3;
 	var menu = new gui.Menu();
-	menu.append(new gui.MenuItem({ label: '__ITEMNAME__', enabled: false}));
+	menu.append(new gui.MenuItem({ label: itemReference.name, enabled: false}));
 	menu.append(new gui.MenuItem({ type: 'separator' }));
 	menu.append(new gui.MenuItem({ label: 'Flip' }));
 	menu.append(new gui.MenuItem({ label: 'Move' }));
 	menu.append(new gui.MenuItem({ type: 'separator' }));
-	menu.append(new gui.MenuItem({ label: 'Sell ($__ITEMVAL__)' }));
+	menu.append(new gui.MenuItem({ label: 'Sell ($'+sellPrice.toFixed(2)+')', click: function(){itemReference.sell();}}));
 	console.log(e);
 	menu.popup(e.pageX, e.pageY);
 	return false;
