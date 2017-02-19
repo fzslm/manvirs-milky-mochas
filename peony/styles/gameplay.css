@@ -1,0 +1,12 @@
+.shop-pre, .shop-post {
+	min-height: 1080px;
+	max-height: 1080px;
+}
+
+.shop-post {
+	float:right;
+}
+
+.shop-pre {
+	float:left;
+}

@@ -1,8 +1,23 @@
-<div class="viewContent" style="background-image: url('assets/title.png'); min-width: 2160px; max-width: 2160px">
-
+<div class="viewContent" style="background-image: url('assets/shop1/p2.png');">
+	<div class="shop-pre"></div>
+	<div class="shop-post"></div>
 </div>
 
 <script>
+
+var shopWidth = 2560; // set shop width
+
+var widthPre = sizeOf('peony/assets/shop1/p1.png').width;
+$('.shop-pre').css('min-width', widthPre).css('max-width', widthPre).css('background-image', 'url("assets/shop1/p1.png")');
+
+var widthPost = sizeOf('peony/assets/shop1/p3.png').width;
+$('.shop-post').css('min-width', widthPost).css('max-width', widthPost).css('background-image', 'url("assets/shop1/p3.png")');
+
+$('.viewContent').css('min-width', shopWidth+widthPost+widthPre+'px');
+$('.viewContent').css('max-width', shopWidth+widthPost+widthPre+'px');
+$('.viewContent').css('background-position-x', widthPre+'px');
+
+
 $('.content').mousewheel(function(e, delta) {
     $(this).scrollLeft(this.scrollLeft + (-delta * 40));
     e.preventDefault();
