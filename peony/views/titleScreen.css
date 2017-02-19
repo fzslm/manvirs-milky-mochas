@@ -1,0 +1,10 @@
+.absolute {
+	position: absolute;
+	transform: translateY(-50%) translateX(-50%);
+}
+
+.startGame {
+	margin: auto;
+	top: 70%;
+	left: 50%;
+}
