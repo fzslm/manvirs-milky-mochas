@@ -1,0 +1,20 @@
+{
+  "main": "peony/index.html",
+  "name": "Project",
+  "description": "Project for OCR Advanced GCE in Computer Science",
+  "version": "1.0.0",
+  "window": {
+    "title": "Project",
+    "icon": "peony/assets/icon.png",
+    "frame": false,
+    "width": 854,
+    "height": 480,
+    "min_width": 854,
+    "min_height": 480,
+    "fullscreen": false
+  },
+  "dependencies": {
+    "fs-extra": "^1.0.0",
+    "jsonfile": "^2.4.0"
+  }
+}

@@ -1,0 +1,71 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.content {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	z-index: 10000;
+}
+
+.canvasContainer {
+	z-index: 1;
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: fixed;
+}
+
+.modalContainer {
+	min-height: 100%;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 100%;
+	position: fixed;
+}
+
+.container {
+	min-height: 100%;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 100%;
+}
+
+.vignette {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: fixed;
+	z-index: 10001;
+	display: none;
+}
+
+.vignette:after {
+	-moz-box-shadow: inset 0 0 20em #000;
+	-webkit-box-shadow: inset 0 0 20em #000;
+	box-shadow: inset 0 0 20em #000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	content: "";
+}
