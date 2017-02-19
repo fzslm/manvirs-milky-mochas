@@ -21,4 +21,9 @@ $('.content').mousewheel(function(e, delta) {
     $(this).scrollLeft(this.scrollLeft + (-delta * 40));
     e.preventDefault();
 });
+
+$('li').on('click', function(res) {
+	$('.trayOptions ul li').removeClass('active');
+	$('#'+res.target.id).addClass('active');
+})
 </script>
