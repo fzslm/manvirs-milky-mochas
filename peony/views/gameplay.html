@@ -28,4 +28,20 @@ $('li').on('click', function(res) {
 	$('.trayView').hide();
 	$('#trayView-'+res.target.id).show();
 })
+
+
+$(document).on("contextmenu", ".item", function(e){
+	var menu = new gui.Menu();
+	menu.append(new gui.MenuItem({ label: '__ITEMNAME__', enabled: false}));
+	menu.append(new gui.MenuItem({ type: 'separator' }));
+	menu.append(new gui.MenuItem({ label: 'Flip' }));
+	menu.append(new gui.MenuItem({ label: 'Move' }));
+	menu.append(new gui.MenuItem({ type: 'separator' }));
+	menu.append(new gui.MenuItem({ label: 'Sell ($__ITEMVAL__)' }));
+	console.log(e);
+	menu.popup(e.pageX, e.pageY);
+	return false;
+});
+
+
 </script>
