@@ -17,7 +17,7 @@ $('.viewContent').css('max-width', gameSave.shopWidth+widthPost+widthPre+'px');
 $('.viewContent').css('background-position-x', widthPre+'px');
 
 gameSave.shop.forEach(function(res){
-	$('.viewContent').append('<div class="item" style="width: '+res.dimensions[0]+'px; height: '+res.dimensions[1]+'px; top: '+res.position[1]+'px; left: '+res.position[0]+'px; position: relative; background: url(\''+res.image+'\')" id="item-'+res.uuid+'"></div>');
+	$('.viewContent').append('<div class="item" style="width: '+res.dimensions[0]+'px; height: '+res.dimensions[1]+'px; top: '+res.position[1]+'px; left: '+res.position[0]+'px; position: absolute; background: url(\''+res.image+'\')" id="item-'+res.uuid+'"></div>');
 
 	res.destroy = function(){_f.game.destroyItem(this.uuid);};
 	res.interaction = itemDefinitions[res.id].interaction;

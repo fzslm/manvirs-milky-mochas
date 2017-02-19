@@ -22,7 +22,7 @@ var itemDefinitions = [
 		},
 		"state": "empty",
 		"dimensions": [540, 394],
-		"position": [760,270],
+		"position": [760,610],
 		"image": "assets/table.png"
 	}
 ];
@@ -48,6 +48,6 @@ function Item(id) {
 	this.interaction = itemDefinitions[id].interaction;
 
 
-	$('.viewContent').append('<div class="item" style="width: '+this.dimensions[0]+'px; height: '+this.dimensions[1]+'px; top: '+this.position[1]+'px; left: '+this.position[0]+'px; position: relative; background: url(\''+this.image+'\')" id="item-'+this.uuid+'"></div>');
+	$('.viewContent').append('<div class="item" style="width: '+this.dimensions[0]+'px; height: '+this.dimensions[1]+'px; top: '+this.position[1]+'px; left: '+this.position[0]+'px; position: absolute; background: url(\''+this.image+'\')" id="item-'+this.uuid+'"></div>');
 
 }
