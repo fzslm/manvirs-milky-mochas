@@ -153,7 +153,9 @@ li.modal-action {
 
 .trayOptions {
 	height: 128px;
-    margin: 24px;
+    margin: 24px 0;
+	width: 100%;
+	text-align: center;
 }
 
 .trayMainView {
@@ -161,4 +163,19 @@ li.modal-action {
     height: calc(100% - 375px);
     margin: 24px;
     border-radius: 12px;
+}
+
+.trayOptions li {
+	display: inline-block;
+    padding: 8px 24px;
+	margin: 8px;
+}
+
+.fa-fs {
+	font-size: 82px !important;
+	color: rgba(255,255,255,0.5);
+}
+
+li.active .fa-fs {
+	color: rgba(255,255,255,0.8);
 }
