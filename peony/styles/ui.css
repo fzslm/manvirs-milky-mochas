@@ -150,3 +150,15 @@ li.modal-action {
 	min-width: 100%;
 	position: fixed;
 }
+
+.trayOptions {
+	height: 128px;
+    margin: 24px;
+}
+
+.trayMainView {
+	background-color: rgb(235,235,235);
+    height: calc(100% - 375px);
+    margin: 24px;
+    border-radius: 12px;
+}
