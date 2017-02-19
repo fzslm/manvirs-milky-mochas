@@ -117,6 +117,7 @@ var _f = {
 		toggleTray: function() {
 			if($('.tray').attr('closed') == "true") {
 				// tray is closed, open it
+				_f.game.refreshItemStore();
 				$('.tray').attr('closed', 'false');
 				$('#trayButton').css('background', "url('assets/common/back.png')");
 				$('.trayContainer').show();
@@ -129,6 +130,28 @@ var _f = {
 					$('.trayContainer').hide();
 				});
 			}
+		},
+
+		refreshItemStore: function() {
+			var listHtml = "";
+			var i = -1;
+			itemDefinitions.forEach(function(res){
+				i = i+1;
+				listHtml = listHtml + '<li onclick="_f.game.confirmBuy('+i+')" id="item'+i+'" class="item"><div class="itemImage" style="background: url(\''+res.image+'\')"></div><div class="itemDetails"><span class="itemName">'+res.name+'</span><span class="itemDescription">'+res.description+' <span style="color: grey; padding-left: 2px;font-size: 32px">($'+res.price+')</span></span></div></li>';
+			});
+			$('#trayView-items').html('<ul class="items">'+listHtml+'</ul>');
+		},
+
+		confirmBuy: function(id) {
+			$('.buyButton').remove();
+			$('li#item'+id).append('<div onclick="_f.game.purchaseItem('+id+')" class="buyButton">Confirm Purchase</div>');
+		},
+
+		purchaseItem: function(id) {
+			alert('Thank you!');
+			$('.buyButton').remove();
+			_f.game.toggleTray();
+			new Item(id);
 		}
 	},
 

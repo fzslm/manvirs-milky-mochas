@@ -162,6 +162,7 @@ li.modal-action {
 	background-color: rgb(235,235,235);
     height: calc(100% - 375px);
     margin: 24px;
+	overflow-y: scroll;
     border-radius: 12px;
 }
 
@@ -178,4 +179,48 @@ li.modal-action {
 
 li.active .fa-fs {
 	color: rgba(255,255,255,0.85);
+}
+
+.itemImage {
+	width: 256px; height: 256px;
+	background-repeat: no-repeat !important;
+    background-size: contain !important;
+	background-position: center !important;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 36px;
+}
+
+.itemDetails {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.buyButton {
+	display: block;
+	text-align: center;
+	font-size: 36px;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: white;
+	vertical-align: middle;
+	padding: 16px;
+	background-color: #27ae60;
+}
+
+.itemName,.itemDescription {
+	display: block;
+}
+
+.itemName {
+	font-weight: 500;
+}
+
+.itemDescription {
+	padding-top: 8px;
+	font-size: 36px;
+}
+
+ul.items li.item {
+	border-bottom: 2px solid grey;
 }

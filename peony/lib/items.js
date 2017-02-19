@@ -23,7 +23,7 @@ var itemDefinitions = [
 		"state": "empty",
 		"dimensions": [540, 394],
 		"position": [760,270],
-
+		"image": "assets/table.png"
 	}
 ];
 
@@ -35,6 +35,7 @@ function Item(id) {
 	this.canNPCInteract = itemDefinitions[id].canNPCInteract;
 	this.interaction = itemDefinitions[id].interaction;
 	this.state = itemDefinitions[id].state;
+	this.image = itemDefinitions[id].image;
 	this.dimensions = itemDefinitions[id].dimensions;
 	this.position = itemDefinitions[id].position;
 	this.uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
