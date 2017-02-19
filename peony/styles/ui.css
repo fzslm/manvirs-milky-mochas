@@ -118,3 +118,10 @@ li.modal-action {
 	padding: 12px 36px;
 
 }
+
+.background {
+	max-height: 1080px;
+    min-height: 1080px;
+    max-width: 1920px;
+    min-width: 1920px;
+}

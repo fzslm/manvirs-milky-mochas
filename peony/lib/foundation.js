@@ -34,7 +34,8 @@ var _f = {
 					_f.system.loadSave();
 				}
 			});
-
+			// show title screen
+			_f.views.loadView('titlescreen');
 
 			return true;
 		},
@@ -87,7 +88,11 @@ var _f = {
 	views: {
 
 		loadView: function(view, data) {
-
+			// loads a HTML file into the content div.
+			$('.content').fadeOut(function(){
+				$('.content').html(fs.readFileSync('peony/views/'+view+'.html', 'utf-8'));
+				$('.content').fadeIn();
+			});
 		}
 
 	},
