@@ -25,5 +25,7 @@ $('.content').mousewheel(function(e, delta) {
 $('li').on('click', function(res) {
 	$('.trayOptions ul li').removeClass('active');
 	$('#'+res.target.id).addClass('active');
+	$('.trayView').hide();
+	$('#trayView-'+res.target.id).show();
 })
 </script>
