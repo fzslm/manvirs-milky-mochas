@@ -13,10 +13,12 @@ html, body {
 
 .content {
 	max-height: 1080px;
-	min-height: 1080px;
-	max-width: 1920px;
-	min-width: 1920px;
-	z-index: 10000;
+    min-height: 1080px;
+    max-width: 1920px;
+    min-width: 1920px;
+    z-index: 10000;
+    overflow-x: overlay;
+    overflow-y: hidden;
 }
 
 .canvasContainer {

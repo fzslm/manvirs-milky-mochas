@@ -6,9 +6,11 @@
 			_f.ui.modal.push('Hi! Before we start...', '<p>What\'s your name? You can change this later in the settings.</p><input type="text" id="name" name="name"></input>', [
 				{
 					"name": "OK",
-					"action": "updateName()"
+					"action": "_f.ui.modal.dismiss(updateName)"
 				}
 			]);
+		} else {
+			_f.views.loadView('gameplay');
 		}
 	}
 
