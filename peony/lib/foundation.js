@@ -77,13 +77,9 @@ var _f = {
 				actions.forEach(function(res){
 					actionEscaped = res.action.replace(/\"/g,'&quot;');
 					actionsHtml = actionsHtml + '<li class="modal-action" onclick="'+actionEscaped+'">'+res.name+'</li>';
-				})
+				});
 
-				$('.modalContainer').prepend('<div class="modal" style="display: none">\
-					<div class="modal-title">'+title+'</div>\
-					<div class="modal-contents">'+contents+'</div>\
-					<ul class="modal-actions">'+actionsHtml+'</ul>\
-				</div>');
+				$('.modalContainer').prepend('<div class="modal" style="display: none"><div class="modal-title">'+title+'</div><div class="modal-contents">'+contents+'</div><ul class="modal-actions">'+actionsHtml+'</ul></div>');
 
 				$('.modal').effect('slide', {direction: 'down', duration: 350, mode: 'show'});
 			},
