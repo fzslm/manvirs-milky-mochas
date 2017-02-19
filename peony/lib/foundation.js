@@ -11,7 +11,20 @@ var _f = {
 
 		newSave: function() {
 			console.log('Creating new save...');
-			gameSave = {};
+			gameSave = {
+				"playerName": "",
+				"shopName": "",
+				"started": false,
+				"money": 1000,
+				"level": 1,
+				"shop": [],
+				"unlockedItems": [
+					{
+						"id": 1,
+						"progress": 100
+					}
+				]
+			};
 			jsonfile.writeFileSync('peony/save.json', gameSave);
 		},
 
