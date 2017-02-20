@@ -117,6 +117,7 @@ var _f = {
 				$('.npcSpeech').append('<div style="display: none;" id="npcSpeechItem'+i+'" class="npcSpeechItem">'+messages[res]+'</div>');
 			});
 
+			$('.item').hide();
 			$('#npcSpeechItem0').show();
 
 			$('.npcImage').hide(); $('.npcSpeech').hide();
@@ -130,13 +131,14 @@ var _f = {
 			// advance the speech bubble or dismiss it, based on the amount of messages left
 
 			if($('.npcSpeechItem').length === 0) {
-				console.log('nothing to dismiss!');
+				// there's nothing to do, as no NPC speech items are on screen.
 				return false;
 			} else if($('.npcSpeechItem').length === 1) {
-				console.log('dismiss');
+				// dismiss the NPC speech box
 				$('.npcLayer').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, _f.game.npcSpeechCallback);
+				$('.item').show();
 			} else {
-				console.log('advance');
+				// advance to the next quote
 				$('#'+$('.npcSpeechItem')[0].id).remove(); /* removes the first available speech item */
 				$('#'+$('.npcSpeechItem')[0].id).show(); /* shows the next available speech item */
 			}
