@@ -94,6 +94,9 @@ if(!gameSave.tutorialComplete) {
 function updateShopNameAndContinueTutorial() {
 	gameSave.shopName = $('#name').val();
 	_f.system.save();
+	_f.game.npcSpeech('manvir', [5, 6, 7], function() {
+		$('.imageButton').show();
+	})
 }
 
 
