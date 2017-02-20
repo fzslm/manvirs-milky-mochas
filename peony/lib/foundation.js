@@ -200,6 +200,20 @@ var _f = {
 				$('#item-'+uuid).css('transform', 'scaleX(1)');
 			}
 			_f.system.save();
+		},
+
+		moveItem: function(uuid){
+			$(document).on('mousemove', function(event){
+			    $('#item-'+uuid).css('left', event.pageX+$('.content').scrollLeft()-($('#item-'+uuid).width()/2)+'px');
+			});
+
+			$('#item-'+uuid).click(function(event){
+				$(document).off('mousemove');
+
+				var itemReference = _f.game.getItemFromUUID(uuid);
+				itemReference.position[0] = $('#item-'+uuid).position().left;
+				_f.system.save();
+			});
 		}
 	},
 

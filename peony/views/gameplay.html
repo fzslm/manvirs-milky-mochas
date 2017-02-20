@@ -53,7 +53,9 @@ $(document).on("contextmenu", ".item", function(e){
 	menu.append(new gui.MenuItem({ label: 'Flip', click: function(){
 		itemReference.flip();
 	}}));
-	menu.append(new gui.MenuItem({ label: 'Move' }));
+	menu.append(new gui.MenuItem({ label: 'Move', click: function(){
+		_f.game.moveItem(e.target.id.substring(5));
+	} }));
 	menu.append(new gui.MenuItem({ type: 'separator' }));
 	menu.append(new gui.MenuItem({ label: 'Sell ($'+sellPrice.toFixed(2)+')', click: function(){itemReference.sell();}}));
 	console.log(e);
