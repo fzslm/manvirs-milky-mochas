@@ -224,6 +224,6 @@ li.active .fa-fs {
 	font-size: 36px;
 }
 
-ul.items li.item {
+ul.itemsList li.itemElement {
 	border-bottom: 2px solid grey;
 }
