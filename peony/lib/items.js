@@ -1,5 +1,15 @@
 var itemDefinitions = [
 	{
+		"name": "Cash Register",
+		"description": "How are customers going to pay if you don't have one of these?",
+		"price": 0,
+		"canNPCInteract": false,
+		"state": "default",
+		"dimensions": [282,271],
+		"position": [760,610],
+		"image": "assets/cashregister.png"
+	},
+	{
 		"name": "Chair",
 		"description": "A simple wooden chair. Patrons can sit on them while they eat and drink.",
 		"price": 100,
@@ -24,6 +34,16 @@ var itemDefinitions = [
 		"dimensions": [540, 394],
 		"position": [760,610],
 		"image": "assets/table.png"
+	},
+	{
+		"name": "Kettle",
+		"description": "Buying more kettles will speed up the rate of production of hot water. We don't know why they're $1500. Blame Brexit.",
+		"price": 1500,
+		"canNPCInteract": false,
+		"state": "default",
+		"dimensions": [237, 240],
+		"position": [760,610],
+		"image": "assets/kettle.png"
 	}
 ];
 
