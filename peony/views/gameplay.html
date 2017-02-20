@@ -49,11 +49,11 @@ $(document).on("contextmenu", ".item", function(e){
 	var sellPrice = (itemReference.price / 4 )* 3;
 	var menu = new gui.Menu();
 	menu.append(new gui.MenuItem({ label: itemReference.name, enabled: false}));
-	menu.append(new gui.MenuItem({ type: 'separator' }));
-	menu.append(new gui.MenuItem({ label: 'Flip', click: function(){
-		itemReference.flip();
-	}}));
 	if(itemReference.canMove) {
+		menu.append(new gui.MenuItem({ type: 'separator' }));
+		menu.append(new gui.MenuItem({ label: 'Flip', click: function(){
+			itemReference.flip();
+		}}));
 		menu.append(new gui.MenuItem({ label: 'Move', click: function(){
 			_f.game.moveItem(e.target.id.substring(5));
 		} }));
