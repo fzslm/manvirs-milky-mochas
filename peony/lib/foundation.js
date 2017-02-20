@@ -20,7 +20,7 @@ var _f = {
 				"level": 1,
 				"shop": [],
 				"shopWidth": 2560,
-				"unlockedItems": [100, 100, 100, 100],
+				"unlockedItems": [true, false, false, false],
 				"lastPlayed": Date.now()
 			};
 			jsonfile.writeFileSync('peony/save.json', gameSave);
