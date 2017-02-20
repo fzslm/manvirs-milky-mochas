@@ -38,6 +38,7 @@ function Item(id) {
 	this.dimensions = itemDefinitions[id].dimensions;
 	this.position = itemDefinitions[id].position;
 	this.id = id;
+	this.flipped = 0;
 	this.uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 	    return v.toString(16);
@@ -46,6 +47,7 @@ function Item(id) {
 	this.destroy = function(){_f.game.destroyItem(this.uuid);};
 	this.sell = function(){_f.game.sellItem(this.uuid);};
 	this.interaction = itemDefinitions[id].interaction;
+	this.flip = function(){_f.game.flipItem(this.uuid);};
 
 
 	$('.viewContent').append('<div class="item" style="width: '+this.dimensions[0]+'px; height: '+this.dimensions[1]+'px; top: '+this.position[1]+'px; left: '+this.position[0]+'px; position: absolute; background: url(\''+this.image+'\')" id="item-'+this.uuid+'"></div>');

@@ -22,6 +22,11 @@ gameSave.shop.forEach(function(res){
 	res.destroy = function(){_f.game.destroyItem(this.uuid);};
 	res.interaction = itemDefinitions[res.id].interaction;
 	res.sell = function(){_f.game.sellItem(this.uuid);};
+	res.flip = function(){_f.game.flipItem(this.uuid);};
+
+	if(res.flipped == 1) {
+		$('#item-'+res.uuid).css('transform', 'scaleX(-1)');
+	}
 
 });
 
@@ -45,7 +50,9 @@ $(document).on("contextmenu", ".item", function(e){
 	var menu = new gui.Menu();
 	menu.append(new gui.MenuItem({ label: itemReference.name, enabled: false}));
 	menu.append(new gui.MenuItem({ type: 'separator' }));
-	menu.append(new gui.MenuItem({ label: 'Flip' }));
+	menu.append(new gui.MenuItem({ label: 'Flip', click: function(){
+		itemReference.flip();
+	}}));
 	menu.append(new gui.MenuItem({ label: 'Move' }));
 	menu.append(new gui.MenuItem({ type: 'separator' }));
 	menu.append(new gui.MenuItem({ label: 'Sell ($'+sellPrice.toFixed(2)+')', click: function(){itemReference.sell();}}));

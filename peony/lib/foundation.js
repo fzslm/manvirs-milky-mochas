@@ -188,6 +188,18 @@ var _f = {
 				}
 			});
 			return returnValue;
+		},
+
+		flipItem: function(uuid){
+			var itemReference = _f.game.getItemFromUUID(uuid);
+			if(itemReference.flipped === 0) {
+				itemReference.flipped = 1;
+				$('#item-'+uuid).css('transform', 'scaleX(-1)');
+			} else {
+				itemReference.flipped = 0;
+				$('#item-'+uuid).css('transform', 'scaleX(1)');
+			}
+			_f.system.save();
 		}
 	},
 
