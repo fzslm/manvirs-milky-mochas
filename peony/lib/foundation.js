@@ -105,6 +105,14 @@ var _f = {
 	},
 
 	game: {
+		npcSpeech: function(npc,message){
+			// shows an NPC speaking certain message(s)
+			messages = ["Welcome to MANVIR'S MILKY MOCHAS!", "I'm so glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?"];
+			message.forEach(function(res){
+				console.log('Print message: '+messages[res]);
+			});
+		},
+
 		updateName: function(name) {
 			// sets the user's name
 			gameSave.playerName = name;

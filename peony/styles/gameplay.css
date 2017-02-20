@@ -10,3 +10,42 @@
 .shop-pre {
 	float:left;
 }
+
+.npcLayer {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	z-index: 10000;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-color: rgba(0,0,0,0.85);
+}
+
+.npcSpeech {
+	max-height: 1016px;
+    min-height: 1016px;
+    max-width: 1180px;
+    min-width: 1180px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: rgba(255,255,255,0.85);
+    border-radius: 24px;
+    position: relative;
+    top: 32px;
+    left: 32px;
+	padding: 64px;
+    box-sizing: border-box;
+	display: inline-block;
+}
+
+.npcImage {
+	background-color: red;
+    display: inline-block;
+    max-height: 1920px;
+    min-height: 1920px;
+    max-width: 740px;
+    min-width: 740px;
+	left: 1212px;
+    position: absolute;
+}
