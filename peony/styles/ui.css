@@ -195,6 +195,8 @@ li.active .fa-fs {
 .itemDetails {
 	display: inline-block;
 	vertical-align: middle;
+	white-space: normal;
+	width: 80%;
 }
 
 .buyButton {
