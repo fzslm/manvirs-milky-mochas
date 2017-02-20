@@ -107,14 +107,38 @@ var _f = {
 	game: {
 		npcSpeech: function(npc,message){
 			// shows an NPC speaking certain message(s)
-			messages = ["Welcome to MANVIR'S MILKY MOCHAS! To continue, click the speech bubble.", "I'm so glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?"];
-			//message.forEach(function(res){
-				$('.npcImage').hide(); $('.npcSpeech').hide();
-				$('.npcLayer').show();
-				$('.npcImage').effect('slide', {direction: 'right', duration: 150, mode: 'show'});
-				$('.npcSpeech').effect('slide', {direction: 'left', duration: 150, mode: 'show'});
-				$('.npcSpeech').text(messages[0]);
-			//});
+			messages = ["Welcome to MANVIR'S MILKY MOCHAS! To continue, click the speech bubble.", "I'm so glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?"];
+
+			$('.npcLayer').html('<div class="npcImage"></div><div onclick="_f.game.npcSpeechAdvance();" class="npcSpeech"></div>');
+
+			message.forEach(function(res, i){
+				$('.npcSpeech').append('<div style="display: none;" id="npcSpeechItem'+i+'" class="npcSpeechItem">'+messages[res]+'</div>');
+			});
+
+			$('#npcSpeechItem0').show();
+
+			$('.npcImage').hide(); $('.npcSpeech').hide();
+			$('.npcLayer').show();
+			$('.npcImage').effect('slide', {direction: 'right', duration: 150, mode: 'show'});
+			$('.npcSpeech').effect('slide', {direction: 'left', duration: 150, mode: 'show'});
+
+		},
+
+		npcSpeechAdvance: function() {
+			// advance the speech bubble or dismiss it, based on the amount of messages left
+
+			if($('.npcSpeechItem').length === 0) {
+				console.log('nothing to dismiss!');
+				return false;
+			} else if($('.npcSpeechItem').length === 1) {
+				console.log('dismiss');
+				$('.npcLayer').effect('slide', {direction: 'down', duration: 350, mode: 'hide'});
+			} else {
+				console.log('advance');
+				$('#'+$('.npcSpeechItem')[0].id).remove(); /* removes the first available speech item */
+				$('#'+$('.npcSpeechItem')[0].id).show(); /* shows the next available speech item */
+			}
+
 		},
 
 		updateName: function(name) {
