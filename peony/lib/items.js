@@ -80,6 +80,8 @@ function Item(id) {
 	this.flip = function(){_f.game.flipItem(this.uuid);};
 
 
-	$('.viewContent').append('<div class="item" style="width: '+this.dimensions[0]+'px; height: '+this.dimensions[1]+'px; top: '+this.position[1]+'px; left: '+this.position[0]+'px; position: absolute; background: url(\''+this.image+'\')" id="item-'+this.uuid+'"></div>');
+	if(this.shouldDraw){
+		$('.viewContent').append('<div class="item" style="width: '+this.dimensions[0]+'px; height: '+this.dimensions[1]+'px; top: '+this.position[1]+'px; left: '+this.position[0]+'px; position: absolute; background: url(\''+this.image+'\')" id="item-'+this.uuid+'"></div>');
+	}
 
 }
