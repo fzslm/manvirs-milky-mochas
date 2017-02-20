@@ -105,9 +105,11 @@ var _f = {
 	},
 
 	game: {
-		npcSpeech: function(npc,message){
+		npcSpeech: function(npc,message, callback){
 			// shows an NPC speaking certain message(s)
 			messages = ["Welcome to MANVIR'S MILKY MOCHAS! To continue, click the speech bubble.", "I'm so glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?"];
+
+			_f.game.npcSpeechCallback = callback;
 
 			$('.npcLayer').html('<div class="npcImage"></div><div onclick="_f.game.npcSpeechAdvance();" class="npcSpeech"></div>');
 
@@ -133,13 +135,17 @@ var _f = {
 			} else if($('.npcSpeechItem').length === 1) {
 				console.log('dismiss');
 				$('.npcLayer').effect('slide', {direction: 'down', duration: 350, mode: 'hide'});
+				_f.game.npcSpeechCallback();
 			} else {
 				console.log('advance');
 				$('#'+$('.npcSpeechItem')[0].id).remove(); /* removes the first available speech item */
 				$('#'+$('.npcSpeechItem')[0].id).show(); /* shows the next available speech item */
 			}
 
+
 		},
+
+		npcSpeechCallback: function() {},
 
 		updateName: function(name) {
 			// sets the user's name

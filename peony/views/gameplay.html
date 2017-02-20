@@ -76,7 +76,9 @@ $(document).on("contextmenu", ".item", function(e){
 if(!gameSave.tutorialComplete) {
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
-	setTimeout(function(){_f.game.npcSpeech('manvir', [0, 1, 2])}, 500); /* run this after 500ms */
+	setTimeout(function(){_f.game.npcSpeech('manvir', [0, 1, 2], function(){
+		alert('callback! this is run after the last message is dismissed');
+	})}, 500); /* run this after 500ms */
 }
 
 
