@@ -134,6 +134,13 @@ var _f = {
 			var i = -1;
 			itemDefinitions.forEach(function(res){
 				i = i+1;
+				if(i === 0){
+					// this is the cash register ID - /only/ show this during tutorial! user should only be able to buy it once
+					if(gameSave.tutorialComplete) {
+						// the user has completed the tutorial, skip to next iteration
+						return;
+					}
+				}
 				listHtml = listHtml + '<li onclick="_f.game.confirmBuy('+i+')" id="item'+i+'" class="itemElement"><div class="itemImage" style="background: url(\''+res.image+'\')"></div><div class="itemDetails"><span class="itemName">'+res.name+'</span><span class="itemDescription">'+res.description+' <span style="color: grey; padding-left: 2px;font-size: 32px">($'+res.price+')</span></span></div></li>';
 			});
 			$('#trayView-items').html('<ul class="itemsList">'+listHtml+'</ul>');
