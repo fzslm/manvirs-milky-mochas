@@ -37,15 +37,19 @@
 	padding: 64px;
     box-sizing: border-box;
 	display: inline-block;
+	white-space: normal;
 }
 
 .npcImage {
-	background-color: red;
-    display: inline-block;
-    max-height: 1920px;
-    min-height: 1920px;
+	display: inline-block;
+    max-height: 1080px;
+    min-height: 1080px;
     max-width: 740px;
     min-width: 740px;
-	left: 1212px;
+    left: 1212px;
     position: absolute;
+    background-image: url(../assets/manvir.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }

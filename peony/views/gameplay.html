@@ -79,7 +79,7 @@ $(document).on("contextmenu", ".item", function(e){
 if(!gameSave.tutorialComplete) {
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
-	_f.game.npcSpeech('manvir', [0, 1, 2]);
+	setTimeout(function(){_f.game.npcSpeech('manvir', [0, 1, 2])}, 500); /* run this after 500ms */
 }
 
 
