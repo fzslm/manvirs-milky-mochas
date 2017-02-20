@@ -5,6 +5,18 @@
 
 .startGame {
 	margin: auto;
-	top: 70%;
-	left: 50%;
+    top: 598.4px;
+    left: 625.3px;
+    height: 187.9px;
+    width: 620.4px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    text-transform: uppercase;
+	font-weight: 300;
+    font-size: 52px;
+    border-radius: 16px;
+}
+
+.startGame:hover {
+	background-color: green;
 }
