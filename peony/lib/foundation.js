@@ -134,8 +134,7 @@ var _f = {
 				return false;
 			} else if($('.npcSpeechItem').length === 1) {
 				console.log('dismiss');
-				$('.npcLayer').effect('slide', {direction: 'down', duration: 350, mode: 'hide'});
-				_f.game.npcSpeechCallback();
+				$('.npcLayer').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, _f.game.npcSpeechCallback);
 			} else {
 				console.log('advance');
 				$('#'+$('.npcSpeechItem')[0].id).remove(); /* removes the first available speech item */
