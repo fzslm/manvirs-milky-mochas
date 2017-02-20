@@ -107,7 +107,7 @@ var _f = {
 	game: {
 		npcSpeech: function(npc,message, callback){
 			// shows an NPC speaking certain message(s)
-			messages = ["Welcome to MANVIR'S MILKY MOCHAS! To continue, click the speech bubble.", "I'm so glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "{{SHOPNAME}}? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, {{PLAYERNAME}}! Now you just need to click the <em>Cash Register</em and choose <em>Purchase Item</em>."];
+			messages = ["Welcome to MANVIR'S MILKY MOCHAS! To continue, click the speech bubble.", "I'm so glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "{{SHOPNAME}}? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, {{PLAYERNAME}}. You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere."];
 
 			_f.game.npcSpeechCallback = callback;
 
@@ -152,20 +152,21 @@ var _f = {
 			_f.system.save();
 		},
 
-		toggleTray: function() {
+		toggleTray: function(callback) {
 			if($('.tray').attr('closed') == "true") {
 				// tray is closed, open it
 				_f.game.refreshItemStore();
 				$('.tray').attr('closed', 'false');
 				$('#trayButton').css('background', "url('assets/common/back.png')");
 				$('.trayContainer').show();
-				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'show'});
+				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'show'}, callback);
 			} else {
 				// tray is open, close it
 				$('.tray').attr('closed', 'true');
 				$('#trayButton').css('background', "url('assets/common/addItem.png')");
 				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, function(){
 					$('.trayContainer').hide();
+					callback();
 				});
 			}
 		},
@@ -186,9 +187,9 @@ var _f = {
 			$('li#item'+id).append('<div onclick="_f.game.purchaseItem('+id+')" class="buyButton">Confirm Purchase</div>');
 		},
 
-		purchaseItem: function(id) {
+		purchaseItem: function(id, calledFromTutorial) {
 			$('.buyButton').remove();
-			_f.game.toggleTray();
+			if(!calledFromTutorial) _f.game.toggleTray();
 			gameSave.shop.push(new Item(id));
 			_f.game.changeMoney(-itemDefinitions[id].price);
 			_f.system.save();

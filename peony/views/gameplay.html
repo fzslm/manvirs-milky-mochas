@@ -100,8 +100,30 @@ function updateShopNameAndContinueTutorial() {
 		$('.imageButton').on('click', function(){
 			_f.game.npcSpeech('manvir', [8], function(){
 				$('.imageButton').hide();
-				_f.game.toggleTray();
-			})
+				_f.game.toggleTray(function(){
+
+					$('.itemElement').attr('onclick', '');
+					$('.itemElement').on('click', function() {
+
+						_f.game.confirmBuy(0);
+						$('.buyButton').attr('onclick', '');
+						$('.buyButton').on('click', function() {
+							_f.game.toggleTray(function(){
+								_f.game.purchaseItem(0, true);
+								setTimeout(function(){
+									_f.game.npcSpeech('manvir', [9], function(){
+										
+									});
+								}, 500);
+							})
+
+						});
+
+					});
+
+				});
+
+			});
 		});
 	})
 }
