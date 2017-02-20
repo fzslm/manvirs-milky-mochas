@@ -204,7 +204,13 @@ var _f = {
 
 		moveItem: function(uuid){
 			$(document).on('mousemove', function(event){
-			    $('#item-'+uuid).css('left', event.pageX+$('.content').scrollLeft()-($('#item-'+uuid).width()/2)+'px');
+
+				if(sizeOf('peony/assets/shop1/p1.png').width < event.pageX+$('.content').scrollLeft() && (sizeOf('peony/assets/shop1/p3.png').width+gameSave.shopWidth) > event.pageX+$('.content').scrollLeft()) {
+
+					$('#item-'+uuid).css('left', event.pageX+$('.content').scrollLeft()-($('#item-'+uuid).width()/2)+'px');
+
+				}
+
 			});
 
 			$('#item-'+uuid).click(function(event){
