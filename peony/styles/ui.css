@@ -60,7 +60,7 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=te
 }
 
 .modal {
-	background-color: red;
+	background-color: rgba(20,20,20,0.75);
 	position: fixed;
 	width: 60%;
 	max-height: 720px;
@@ -74,6 +74,7 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=te
 	margin: 16px;
 	font-size: 54px;
     font-weight: 500;
+	color: rgb(240,240,240);
 }
 
 .modal-contents {
@@ -81,8 +82,9 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=te
 	white-space: normal;
 	padding: 16px;
 	font-size: 32px;
-	overflow-y: scroll;
+	/* removed scrolling, because no modal will ever need to scroll */
 	max-height: 520px;
+	color: rgb(240,240,240);
 }
 
 .modalContainer {
@@ -107,9 +109,9 @@ ul.modal-actions {
 
 li.modal-action {
 	display: inline-block;
-    padding: 8px 24px;
+    padding: 12px 48px;
 	margin: 8px;
-    background-color: green;
+    background-color: rgba(255,255,255,0.7);
     border-radius: 4px;
 }
 

@@ -3,10 +3,10 @@
 <script>
 	function startGame(){
 		if(!gameSave.started) {
-			_f.ui.modal.push('Hi! Before we start...', '<p>What\'s your name? You can change this later in the settings.</p><input type="text" id="name" name="name"></input>', [
+			_f.ui.modal.push('What\'s cookin\', good lookin\'?', '<p>Before I take you on MANVIR\'S WILD COFFEE SHOP RIDE, I need your name.</p><input type="text" id="name" name="name"></input>', [
 				{
 					"name": "OK",
-					"action": "_f.ui.modal.dismiss(updateName)"
+					"action": "gameSave.started = true; _f.system.save(); _f.ui.modal.dismiss(updateNameAndStart);"
 				}
 			]);
 		} else {
@@ -14,8 +14,9 @@
 		}
 	}
 
-	function updateName() {
+	function updateNameAndStart() {
 		_f.game.updateName($('#name').val());
+		_f.views.loadView('gameplay');
 	}
 </script>
 
