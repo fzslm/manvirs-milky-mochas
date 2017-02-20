@@ -227,3 +227,32 @@ li.active .fa-fs {
 ul.itemsList li.itemElement {
 	border-bottom: 2px solid grey;
 }
+
+.moneyHud {
+	position: fixed;
+	right: 32px;
+	top: 32px;
+	background-color: #725037;
+	border-radius: 16px;
+}
+
+.moneyText {
+	vertical-align: middle;
+	display: inline-block;
+	padding-right: 48px;
+	color: white;
+	font-weight: 400;
+}
+
+.moneyIcon {
+	min-width: 64px;
+	max-width: 64px;
+	min-height: 64px;
+	max-height: 64px;
+	background-image: url(../assets/coin.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 16px 32px;
+}

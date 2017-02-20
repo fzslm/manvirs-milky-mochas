@@ -2,6 +2,7 @@
 	<div class="shop-pre"></div>
 	<div class="shop-post"></div>
 	<button class="imageButton" id="trayButton" style="bottom:32px;left:32px;background:url('assets/common/addItem.png')" onclick="_f.game.toggleTray();"></button>
+	<div class="moneyHud"><div class="moneyIcon"></div><div class="moneyText"></div></div>
 </div>
 
 <script>
@@ -15,6 +16,8 @@ $('.shop-post').css('min-width', widthPost).css('max-width', widthPost).css('bac
 $('.viewContent').css('min-width', gameSave.shopWidth+widthPost+widthPre+'px');
 $('.viewContent').css('max-width', gameSave.shopWidth+widthPost+widthPre+'px');
 $('.viewContent').css('background-position-x', widthPre+'px');
+
+_f.game.updateMoneyHud();
 
 gameSave.shop.forEach(function(res){
 	$('.viewContent').append('<div class="item" style="width: '+res.dimensions[0]+'px; height: '+res.dimensions[1]+'px; top: '+res.position[1]+'px; left: '+res.position[0]+'px; position: absolute; background: url(\''+res.image+'\')" id="item-'+res.uuid+'"></div>');

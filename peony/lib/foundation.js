@@ -181,6 +181,7 @@ var _f = {
 		changeMoney: function(amount) {
 			console.log('changing by '+amount);
 			gameSave.money = gameSave.money + amount;
+			_f.game.updateMoneyHud();
 			_f.system.save();
 		},
 
@@ -224,6 +225,10 @@ var _f = {
 				itemReference.position[0] = $('#item-'+uuid).position().left;
 				_f.system.save();
 			});
+		},
+
+		updateMoneyHud: function() {
+			$('.moneyText').text('$'+gameSave.money.toFixed(2));
 		}
 	},
 
