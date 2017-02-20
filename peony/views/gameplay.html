@@ -58,8 +58,10 @@ $(document).on("contextmenu", ".item", function(e){
 			_f.game.moveItem(e.target.id.substring(5));
 		} }));
 	}
-	menu.append(new gui.MenuItem({ type: 'separator' }));
-	menu.append(new gui.MenuItem({ label: 'Sell ($'+sellPrice.toFixed(2)+')', click: function(){itemReference.sell();}}));
+	if(itemReference.price > 0) {
+		menu.append(new gui.MenuItem({ type: 'separator' }));
+		menu.append(new gui.MenuItem({ label: 'Sell ($'+sellPrice.toFixed(2)+')', click: function(){itemReference.sell();}}));
+	}
 	console.log(e);
 	menu.popup(e.pageX, e.pageY);
 	return false;
