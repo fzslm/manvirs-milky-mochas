@@ -15,16 +15,13 @@ var _f = {
 				"playerName": "",
 				"shopName": "",
 				"started": false,
+				"tutorialComplete": false,
 				"money": 1000,
 				"level": 1,
 				"shop": [],
 				"shopWidth": 2560,
-				"unlockedItems": [
-					{
-						"id": 1,
-						"progress": 100
-					}
-				]
+				"unlockedItems": [100, 100, 100, 100],
+				"lastPlayed": Date.now()
 			};
 			jsonfile.writeFileSync('peony/save.json', gameSave);
 		},
