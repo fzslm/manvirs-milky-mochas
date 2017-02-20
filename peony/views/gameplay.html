@@ -77,8 +77,23 @@ if(!gameSave.tutorialComplete) {
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
 	setTimeout(function(){_f.game.npcSpeech('manvir', [0, 1, 2], function(){
-		alert('callback! this is run after the last message is dismissed');
+		setTimeout(function(){
+			/* run this after 1s */
+			_f.game.npcSpeech('manvir', [3, 4], function(){
+				_f.ui.modal.push("Well? What are you going to call your shop?", "<p>Be careful picking this - you won't be able to change it later!</p><input type=\"text\" id=\"name\" name=\"name\"></input>", [
+					{
+						"name": "OK",
+						"action": "_f.ui.modal.dismiss(updateShopNameAndContinueTutorial);"
+					}
+				]);
+			});
+		}, 3000);
 	})}, 500); /* run this after 500ms */
+}
+
+function updateShopNameAndContinueTutorial() {
+	gameSave.shopName = $('#name').val();
+	_f.system.save();
 }
 
 
