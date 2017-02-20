@@ -7,7 +7,9 @@ var itemDefinitions = [
 		"state": "default",
 		"dimensions": [282,271],
 		"position": [760,610],
-		"image": "assets/cashregister.png"
+		"image": "assets/cashregister.png",
+		"shouldDraw": true,
+		"canMove": false
 	},
 	{
 		"name": "Chair",
@@ -20,7 +22,9 @@ var itemDefinitions = [
 		"state": "vacant",
 		"dimensions": [274,340],
 		"position": [512,640],
-		"image": "assets/chair.png"
+		"image": "assets/chair.png",
+		"shouldDraw": true,
+		"canMove": true
 	},
 	{
 		"name": "Table",
@@ -33,7 +37,9 @@ var itemDefinitions = [
 		"state": "empty",
 		"dimensions": [540, 394],
 		"position": [760,610],
-		"image": "assets/table.png"
+		"image": "assets/table.png",
+		"shouldDraw": true,
+		"canMove": true
 	},
 	{
 		"name": "Kettle",
@@ -43,7 +49,9 @@ var itemDefinitions = [
 		"state": "default",
 		"dimensions": [237, 240],
 		"position": [760,610],
-		"image": "assets/kettle.png"
+		"image": "assets/kettle.png",
+		"shouldDraw": false,
+		"canMove": false
 	}
 ];
 
@@ -57,6 +65,8 @@ function Item(id) {
 	this.image = itemDefinitions[id].image;
 	this.dimensions = itemDefinitions[id].dimensions;
 	this.position = itemDefinitions[id].position;
+	this.shouldDraw = itemDefinitions[id].shouldDraw;
+	this.canMove = itemDefinitions[id].canMove;
 	this.id = id;
 	this.flipped = 0;
 	this.uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
