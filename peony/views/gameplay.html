@@ -96,6 +96,11 @@ function updateShopNameAndContinueTutorial() {
 	_f.system.save();
 	_f.game.npcSpeech('manvir', [5, 6, 7], function() {
 		$('.imageButton').show();
+		$('.imageButton').on('click', function(){
+			_f.game.npcSpeech('manvir', [8], function(){
+				
+			})
+		});
 	})
 }
 
