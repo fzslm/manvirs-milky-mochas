@@ -76,7 +76,8 @@ $(document).on("contextmenu", ".item", function(e){
 	return false;
 });
 
-if(!gameSave.tutorialComplete) {
+if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
+	// only run this if the player hasn't completed the tutorial, AND they haven't just come back from the first minigame
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
 	setTimeout(function(){_f.game.npcSpeech('manvir', [0, 1, 2], function(){
@@ -92,6 +93,11 @@ if(!gameSave.tutorialComplete) {
 			});
 		}, 3000);
 	})}, 500); /* run this after 500ms */
+} else if(!gameSave.tutorialComplete && typeof(minigameScores) == "object") {
+	// player is still playing the tutorial, but has come back from the first minigame.
+	$('.moneyHud').hide();
+	$('.imageButton').hide();
+	alert(_f.game.judgeCoffee('npc1', 2, 2, 50, [false, false, false, false, false, false]));
 }
 
 function updateShopNameAndContinueTutorial() {

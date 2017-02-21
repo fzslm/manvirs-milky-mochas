@@ -146,7 +146,7 @@ var _f = {
 	game: {
 		npcSpeech: function(npc,message, callback){
 			// shows an NPC speaking certain message(s)
-			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere.", "<strong>WHAT?</strong> I <strong>specifically</strong> said NO customers today! Oh, I'm angry. And you wouldn't like me when I'm angry.","<em>sighs</em> Well, I suppose I will have to teach you how to make coffee!", "You'll know you have a customer when you see that little dollar sign in the bottom-right corner. Tap it to ask the customer what they want!", "He-he-he!", "Yeah, these guys are <small>really</small> particular about their coffee. It drives me insane. There's this one guy who always asks for tons of milk. Says it adds extra lactose or something like that...", "Anyway, never mind about that. Hope you remembered what that guy just ordered, because I'm not reminding you. Let's make some coffee!"];
+			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere.", "<strong>WHAT?</strong> I <strong>specifically</strong> said NO customers today! Oh, I'm angry. And you wouldn't like me when I'm angry.","<em>sighs</em> Well, I suppose I will have to teach you how to make coffee!", "You'll know you have a customer when you see that little dollar sign in the bottom-right corner. Tap it to ask the customer what they want!", "He-he-he!", "Yeah, these guys are <small>really</small> particular about their coffee. It drives me insane. There's this one guy who always asks for tons of milk. Says it adds extra lactose or something like that...", "Anyway, never mind about that. Hope you remembered what that guy just ordered, because I'm not reminding you. Let's make some coffee!", "<em>slurp</em>", "This coffee is amazing! It's exactly what I wanted!", "...Wow! I wasn't expecting it to be this good!", "Oh my god! It's perfect!", "Yeah! This is real coffee!", "Wow! This is incredible!", "...Mmm! This is good!", "This is nice! I'd certainly drink this again!", "Mmm! This is some damn fine coffee!", "I'm impressed, $PLAYERNAME! This tastes great!", "Nice work! This is a great coffee!", "...Ehh... I suppose it's alright. I've certainly had better.", "... It could be worse, but it could definitely be better...", "Coffee's coffee, but I don't know about this one...", "It has potential, but I think something's missing...", "...I guess it's drinkable. The question is - do I <em>really</em> want to drink it?", "... $PLAYERNAME, I know you're new and all that, but come on now. This is awful.", "Did you even add the coffee beans, $PLAYERNAME? Because I can barely taste them.", "What's in this? It's just that I don't think I like it very much.", "... Ugh! This is really bad.", "... I'm not paying for this. I genuinely think I'm going to throw up everywhere.", "Are you trying to kill me or something? This is some of the worst coffee I've ever had in my life. In fact, no, I think it <em>is</em> the worst.", "I don't feel well. Is there a hospital near here? It's just that I think I have food poisoning now, $PLAYERNAME. And if it turns out I do, I'm suing you.", "Well, there goes the prestige of what was once <strong>MANVIR'S MILKY MOCHAS</strong>. Don't expect me to be back here again.", "Can I ask a quick question? How exactly did you screw up this bad?"];
 
 			_f.game.npcSpeechCallback = callback;
 
@@ -194,6 +194,70 @@ var _f = {
 		},
 
 		npcSpeechCallback: function() {},
+
+		judgeCoffee: function(npc, desiredBeans, desiredSize, desiredMilk, desiredExtras) {
+			// a score is assigned to the user when they make a coffee, as a percentage between 0 - 100.
+			// five minigames - each minigame has 20% weight.
+			// each percentage causes a different reaction and payment:
+			// 0 - 20%: AWFUL. no payment
+			// 20% - 40%: BAD, $2.00 paid
+			// 40% - 60%: AVERAGE: $3.50 paid
+			// 60% - 80%: GOOD, $7.00 paid
+			// 80% - 100%: AMAZING, $14.00 paid
+
+			var score = 0;
+
+			///// BEANS
+			// did the player pick the right beans? +20 to score if they did, +0 if they didn't.
+			if(minigameScores.beans == desiredBeans) score+=20;
+			alert('Beans score added, score is now '+score);
+
+			///// GRINDING
+			// how well were the beans ground?
+			// first, get the grinding score as a number between 0 or 1 (0 if ground as bad as possible, 1 if ground perfectly)
+			var grindingScore = Math.abs(Math.abs((minigameScores.grind/50)-1)-1);
+			// this formula first divides the player's score by 50 (a perfect score).
+			// this causes the score to be in the range 0 - 2, where 0 is not at all ground and 2 is too finely ground, and 1 is perfect
+			// it then takes away 1 and finds the absolute value. this makes 1 ground as badly as possible (in either direction), and 0 perfect.
+			// we want the numbers to be the other way around, so we take away 1 and take the absolute value again. we now have the desired format.
+			// now add 20 * grindingScore to the total
+			score+=20*grindingScore;
+			alert('Grinding score added, score is now '+score);
+
+			///// SIZE
+			// did the player pick the right size cup? +20 to score if they did, +0 if they didn't.
+			if(minigameScores.size == desiredSize) score+=20;
+			alert('Size score added, score is now '+score);
+
+			///// MILK
+			// was the right amount of milk added?
+			// first, work out the difference between what the customer ordered and what the player made.
+			var difference = Math.abs(minigameScores.milk - desiredMilk);
+			// now divide that by 100, take away one and get the absolute value.
+			difference = Math.abs((difference / 100)-1);
+			// difference will equal 1 if the exact right amount of milk was added, 0 if it was completely wrong
+			// multiply 20 * difference and add that to the score.
+			score+=20*difference;
+			alert('Milk score added, score is now '+score);
+
+			///// FLAVOURING/EXTRAS
+			// how correct were the user's choices?
+			// 3 points awarded for each correct choice, +2 bonus if they got all of them right.
+			// then add that score to the total
+			var extrasScore = 0;
+			desiredExtras.forEach(function(res, i){
+				if(res == minigameScores.flavouring[i]) {
+					extrasScore+=3;
+				}
+			});
+			if(extrasScore==18) {
+				extrasScore=20; // award +2 bonus if they got all of them right (3 * 6 = 18, so this triggers on 18pts)
+			}
+			score+=extrasScore;
+			alert('Extras score added, score is now '+score);
+
+			return score;
+		},
 
 		updateName: function(name) {
 			// sets the user's name
