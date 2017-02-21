@@ -1,5 +1,5 @@
 .viewContent {
-	background-color: red;
+	background-color: black;
 }
 
 .beanSelect {
@@ -37,4 +37,27 @@
 
 .beans3 {
 	left: 1444.2px; top: 296.5px;
+}
+
+.beanGrind {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: relative;
+	display: none;
+	background-image: url('../assets/beanGrind.png')
+}
+
+.beanGrindBean {
+	background-image: url(../assets/bean.png);
+    max-height: 452px;
+    min-height: 452px;
+    max-width: 360px;
+    min-width: 360px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 780px;
+    top: 380px;
 }

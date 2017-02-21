@@ -5,10 +5,25 @@
 		<button class="beans beans2"></button>
 		<button class="beans beans3"></button>
 	</div>
+	<div class="beanGrind">
+		<div class="beanGrindBean">
+
+		</div>
+	</div>
 </div>
 
 <link href="views/minigame.css" type="text/css" rel="stylesheet">
 
 <script>
 	_f.music.changeBGM('minigame');
+
+	$('.beans').on('click', function(){
+		$('.beanSelect').fadeOut(500, function(){
+			$('.beanGrind').fadeIn(500);
+		});
+	});
+
+	$('.beanGrindBean').on('click', function(){
+		_f.music.playSFX('grind');
+	})
 </script>
