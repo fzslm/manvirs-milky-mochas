@@ -80,6 +80,21 @@
 		$('.cupSize').fadeOut(500, function(){
 			$('.milking').fadeIn(500, function(){
 
+				$(document).keydown(function(e) {
+				    switch(e.which) {
+			        	case 38: {
+							alert('test');
+							break;
+						}
+
+				        case 40: {
+							alert('test 2');
+							break;
+						}
+				    }
+				    e.preventDefault();
+				});
+
 			})
 		})
 	});
