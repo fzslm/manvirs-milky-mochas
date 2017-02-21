@@ -10,7 +10,7 @@ var _f = {
 				_f.music.currentlyPlayingBGM.stop();
 				_f.music.currentlyPlayingBGM = false;
 			} else {
-				console.log('Changing BGM track to assets/'+bgm+'.ogg');
+				console.log('Changing BGM track to assets/bgm/'+bgm+'.ogg');
 				try{
 					_f.music.currentlyPlayingBGM.stop();
 				} catch(err) {
@@ -20,14 +20,14 @@ var _f = {
 					//
 					// using a try/catch block ignores this failure and continues.
 				}
-				_f.music.currentlyPlayingBGM = new Howl({src: 'assets/'+bgm+'.ogg', loop: true});
+				_f.music.currentlyPlayingBGM = new Howl({src: 'assets/bgm/'+bgm+'.ogg', loop: true});
 				_f.music.currentlyPlayingBGM.play();
 			}
 		},
 
 		playSFX: function(sfx) {
-			console.log('Playing SFX at assets/'+sfx+'.ogg');
-			new Howl({src: 'assets/'+sfx+'.ogg'}).play();
+			console.log('Playing SFX at assets/sfx/'+sfx+'.ogg');
+			new Howl({src: 'assets/sfx/'+sfx+'.ogg'}).play();
 		}
 	},
 

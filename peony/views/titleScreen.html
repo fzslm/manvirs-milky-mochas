@@ -1,6 +1,8 @@
 <link href="views/titleScreen.css" type="text/css" rel="stylesheet">
 
 <script>
+	_f.music.changeBGM('menu');
+
 	function startGame(){
 		if(!gameSave.started) {
 			_f.ui.modal.push('What\'s cookin\', good lookin\'?', '<p>Before I take you on MANVIR\'S WILD COFFEE SHOP RIDE, I need your name.</p><input type="text" id="name" name="name"></input>', [

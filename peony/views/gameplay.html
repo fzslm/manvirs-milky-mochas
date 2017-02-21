@@ -8,6 +8,8 @@
 
 <script>
 
+_f.music.changeBGM('game');
+
 var widthPre = sizeOf('peony/assets/shop1/p1.png').width;
 $('.shop-pre').css('min-width', widthPre).css('max-width', widthPre).css('background-image', 'url("assets/shop1/p1.png")');
 
@@ -112,7 +114,7 @@ function updateShopNameAndContinueTutorial() {
 								_f.game.purchaseItem(0, true);
 								setTimeout(function(){
 									_f.game.npcSpeech('manvir', [9], function(){
-										
+
 									});
 								}, 500);
 							})
