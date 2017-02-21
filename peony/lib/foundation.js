@@ -135,6 +135,7 @@ var _f = {
 		loadView: function(view, data) {
 			// loads a HTML file into the content div.
 			$('.content').fadeOut(function(){
+				$('*').off(); /* disables all key + click bindings from previous view */
 				$('.content').html(fs.readFileSync('peony/views/'+view+'.html', 'utf-8'));
 				$('.content').fadeIn();
 			});
