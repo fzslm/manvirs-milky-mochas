@@ -42,7 +42,7 @@
 		"grind": false,
 		"size": false,
 		"milk": false,
-		"flavouring": false
+		"flavouring": [false, false, false, false, false, false]
 	}
 
 	_f.music.changeBGM('minigame');
@@ -129,7 +129,12 @@
 							// enter pressed
 							$('.milking').fadeOut(500, function(){
 								$('.flavouring').fadeIn(500, function(){
-									// flavouring code goes here
+									$('.flavour').on('click', function(e){
+										flavourType = e.toElement.id.substring(7);
+										$('#'+e.toElement.id).css('background-color', '#222222').css('opacity', 1);
+											/* #222222 is the background color, so this basically hides the button */
+										minigameScores.flavouring[flavourType] = true;
+									})
 								})
 							})
 						}
