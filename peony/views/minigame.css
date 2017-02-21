@@ -156,3 +156,13 @@
 .cupMilk80  { background-image: url(../assets/cup-full-milk80.png) }
 .cupMilk90  { background-image: url(../assets/cup-full-milk90.png) }
 .cupMilk100 { background-image: url(../assets/cup-full-milk100.png) }
+
+.flavouring {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: relative;
+	display: none;
+	background-image: url('../assets/flavouring.png')
+}

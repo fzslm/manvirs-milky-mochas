@@ -23,6 +23,9 @@
 		</div>
 		<div class="cupMilk cupMilk0"></div>
 	</div>
+	<div class="flavouring">
+		
+	</div>
 </div>
 
 <link href="views/minigame.css" type="text/css" rel="stylesheet">
@@ -115,6 +118,15 @@
 								expectedButtonPress = 0; /* now up is expected */
 							}
 							break;
+						}
+
+						case 13: {
+							// enter pressed
+							$('.milking').fadeOut(500, function(){
+								$('.flavouring').fadeIn(500, function(){
+									// flavouring code goes here
+								})
+							})
 						}
 				    }
 				    e.preventDefault();
