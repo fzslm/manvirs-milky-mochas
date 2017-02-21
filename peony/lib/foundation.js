@@ -153,11 +153,20 @@ var _f = {
 			$('.npcLayer').html('<div class="npcImage"></div><div onclick="_f.game.npcSpeechAdvance();" class="npcSpeech"></div>');
 
 			if(typeof(message) == "string") {
+				// the message is a single string
 				$('.npcSpeech').append('<div style="display: none;" id="npcSpeechItem0" class="npcSpeechItem">'+message+'</div>');
 			} else {
-				message.forEach(function(res, i){
-					$('.npcSpeech').append('<div style="display: none;" id="npcSpeechItem'+i+'" class="npcSpeechItem">'+messages[res]+'</div>');
-				});
+				if(typeof(message[0]) == "string") {
+					// the message format is an array of strings.
+					message.forEach(function(res, i){
+						$('.npcSpeech').append('<div style="display: none;" id="npcSpeechItem'+i+'" class="npcSpeechItem">'+res+'</div>');
+					});
+				} else {
+					// the message format is an array of ints referring to items in messages array.
+					message.forEach(function(res, i){
+						$('.npcSpeech').append('<div style="display: none;" id="npcSpeechItem'+i+'" class="npcSpeechItem">'+messages[res]+'</div>');
+					});
+				}
 			}
 
 
