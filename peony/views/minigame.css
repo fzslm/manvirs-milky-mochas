@@ -78,3 +78,38 @@
     font-size: 96px;
     color: white;
 }
+
+.cupSize {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: relative;
+	display: none;
+	background-image: url('../assets/cupSize.png')
+}
+
+.cup0 {
+	left: 249.8px; top: 691.9px;
+	width: 291.5px; height: 388.1px;
+}
+
+.cup1 {
+	left: 662.4px; top: 640.1px;
+	width: 374.5px; height: 442.6px;
+}
+
+.cup2 {
+	left: 1175.9px; top: 540.7px;
+	width: 482.1px; height: 542px;
+}
+
+.cup {
+	position: absolute;
+	opacity: 0;
+	background-color: rgb(0,0,0);
+}
+
+.cup:active {
+	opacity: 0.5;
+}
