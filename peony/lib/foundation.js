@@ -195,7 +195,7 @@ var _f = {
 
 		npcSpeechCallback: function() {},
 
-		judgeCoffee: function(npc, desiredBeans, desiredSize, desiredMilk, desiredExtras) {
+		judgeCoffee: function(desiredBeans, desiredSize, desiredMilk, desiredExtras) {
 			// a score is assigned to the user when they make a coffee, as a percentage between 0 - 100.
 			// five minigames - each minigame has 20% weight.
 			// each percentage causes a different reaction and payment:
@@ -220,7 +220,7 @@ var _f = {
 			// we want the numbers to be the other way around, so we take away 1 and take the absolute value again. we now have the desired format.
 			// now add 20 * grindingScore to the total
 			score+=20*grindingScore;
-			
+
 			///// SIZE
 			// did the player pick the right size cup? +20 to score if they did, +0 if they didn't.
 			if(minigameScores.size == desiredSize) score+=20;
