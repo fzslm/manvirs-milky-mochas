@@ -24,7 +24,7 @@
 		<div class="cupMilk cupMilk0"></div>
 	</div>
 	<div class="flavouring">
-		
+
 	</div>
 </div>
 
@@ -107,8 +107,8 @@
 								// only run this code if down was expected.
 								_f.music.playSFX('milk'); // play the milking sound effect
 								milkAmount += 0.02; // changes the amount of milk.
-								if(milkAmount >= 100) {
-									milkAmount = 100; // 100% is the maximum amount of milk
+								if(milkAmount >= 1) {
+									milkAmount = 1; // 100% is the maximum amount of milk
 								}
 								// the possible milk percentages go up in 10%s (i.e. 0%, 10%, 20%, ..., 100%)
 								// therefore we need to round milkAmount DOWN and convert it into a percentage.
