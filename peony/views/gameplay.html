@@ -3,6 +3,7 @@
 	<div class="shop-pre"></div>
 	<div class="shop-post"></div>
 	<button class="imageButton" id="trayButton" style="bottom:32px;left:32px;background:url('assets/common/addItem.png')" onclick="_f.game.toggleTray();"></button>
+	<button class="customerButton" style="display:none;bottom:32px;right:32px;background:url('assets/common/customer.png')" onclick="_f.game.checkCustomer();"></button>
 	<div class="moneyHud"><div class="moneyIcon"></div><div class="moneyText"></div></div>
 </div>
 
@@ -116,7 +117,22 @@ function updateShopNameAndContinueTutorial() {
 									_f.game.npcSpeech('manvir', [9], function(){
 										_f.music.playSFX('customer', function(){
 											_f.game.npcSpeech('manvir', [10,11,12], function(){
-
+												$('.customerButton').show();
+												$('.customerButton').attr('onclick', '');
+												$('.customerButton').on('click', function(){
+													_f.game.npcSpeech('npc1', "Erm, hi. Let's see... I'd like a large coffee with the Strong Manvir beans. Oh, and some extra Mandhu Milk please. But not too much! I've just had my fill!", function(){
+														_f.game.npcSpeech('manvir', [14,15], function(){
+															_f.music.playSFX('coffee-start');
+															_f.views.loadView('minigame', {
+																"beans": 0,
+																"milk": 2,
+																"sugar": 0,
+																"cream": false,
+																"flavouring": false
+															});
+														})
+													});
+												})
 											})
 										});
 									});
