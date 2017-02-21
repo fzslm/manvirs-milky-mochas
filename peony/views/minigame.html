@@ -80,15 +80,31 @@
 		$('.cupSize').fadeOut(500, function(){
 			$('.milking').fadeIn(500, function(){
 
+				expectedButtonPress = 0;
+				/* this is used in the milking minigame to determine which key press is expected.
+				the player must press up and down repeatedly until the coffee has the right amount of milk,
+				then press enter to accept. to determine which button needs to be pressed next, this var is used.
+				0 = up is expected, 1 = down is expected. this is changed to the opposite value after the expected
+				key is pressed */
+
 				$(document).keydown(function(e) {
 				    switch(e.which) {
 			        	case 38: {
-							alert('test');
+							// up pressed
+							if(expectedButtonPress === 0) {
+								// only run this code if up was expected.
+								expectedButtonPress = 1; /* now down is expected */
+							}
 							break;
 						}
 
 				        case 40: {
-							alert('test 2');
+							// down pressed
+							if(expectedButtonPress == 1) {
+								// only run this code if down was expected.
+								_f.music.playSFX('milk'); // play the milking sound effect
+								expectedButtonPress = 0; /* now up is expected */
+							}
 							break;
 						}
 				    }
