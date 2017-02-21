@@ -17,6 +17,12 @@
 		<button id="cup1" class="cup cup1"></button>
 		<button id="cup2" class="cup cup2"></button>
 	</div>
+	<div class="milking">
+		<div class="udder">
+
+		</div>
+		<div class="cupMilk"></div>
+	</div>
 </div>
 
 <link href="views/minigame.css" type="text/css" rel="stylesheet">
@@ -71,5 +77,10 @@
 	$('.cup').on('click', function(e) {
 		cupSize = e.toElement.id.substring(3);
 		minigameScores.size = cupSize;
+		$('.cupSize').fadeOut(500, function(){
+			$('.milking').fadeIn(500, function(){
+
+			})
+		})
 	});
 </script>

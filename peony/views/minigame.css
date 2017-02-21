@@ -113,3 +113,35 @@
 .cup:active {
 	opacity: 0.5;
 }
+
+.milking {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: relative;
+	display: none;
+	background-image: url('../assets/blank.png')
+}
+
+.udder {
+	width: 802.5px;
+    height: 772.4px;
+    background-image: url(../assets/udder.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 558.75px;
+    position: relative;
+    top: -8px;
+}
+
+.cupMilk {
+	width: 302px;
+	height: 442px;
+	background-image: url(../assets/cup-full-milk0.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	left: 809px;
+	position: relative;
+	bottom: -56px;
+}
