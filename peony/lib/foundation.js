@@ -25,9 +25,17 @@ var _f = {
 			}
 		},
 
-		playSFX: function(sfx) {
+		playSFX: function(sfx, callback) {
 			console.log('Playing SFX at assets/sfx/'+sfx+'.ogg');
-			new Howl({src: 'assets/sfx/'+sfx+'.ogg'}).play();
+			new Howl({src: 'assets/sfx/'+sfx+'.ogg', onend: function(){
+				try{
+					callback();
+				} catch(e) {
+					/* we use a try block here because the callback might not exist.
+					using a try block ensures execution completes successfully even
+					if the callback function is not passed. */
+				}
+			}}).play();
 		}
 	},
 
@@ -137,7 +145,7 @@ var _f = {
 	game: {
 		npcSpeech: function(npc,message, callback){
 			// shows an NPC speaking certain message(s)
-			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere."];
+			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere.", "<strong>WHAT?</strong> I <strong>specifically</strong> said NO customers today! Oh, I'm angry. And you wouldn't like me when I'm angry.","<em>sighs</em> Well, I suppose I will have to teach you how to make coffee!", "You'll know you have a customer when you see that little dollar sign in the bottom-right corner. Tap it to ask the customer what they want!", "He-he-he!"];
 
 			_f.game.npcSpeechCallback = callback;
 

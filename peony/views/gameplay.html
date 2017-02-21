@@ -114,7 +114,11 @@ function updateShopNameAndContinueTutorial() {
 								_f.game.purchaseItem(0, true);
 								setTimeout(function(){
 									_f.game.npcSpeech('manvir', [9], function(){
-										_f.music.sfx('customer');
+										_f.music.playSFX('customer', function(){
+											_f.game.npcSpeech('manvir', [10,11,12], function(){
+
+											})
+										});
 									});
 								}, 500);
 							})
