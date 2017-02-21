@@ -59,5 +59,22 @@
     background-repeat: no-repeat;
     position: absolute;
     left: 780px;
-    top: 380px;
+    top: 360px;
+}
+
+.progress-bar {
+	position: absolute;
+    height: 64px;
+    top: 924px;
+    left: 72px;
+    border-radius: 8px;
+	background-color: #34A5DA;
+}
+
+.counter {
+	position: absolute;
+    top: 48px;
+    right: 48px;
+    font-size: 96px;
+    color: white;
 }

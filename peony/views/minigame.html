@@ -6,24 +6,58 @@
 		<button class="beans beans3"></button>
 	</div>
 	<div class="beanGrind">
+		<div class="counter">10</div>
 		<div class="beanGrindBean">
 
 		</div>
+		<div class="progress-bar"></div>
 	</div>
 </div>
 
 <link href="views/minigame.css" type="text/css" rel="stylesheet">
 
 <script>
+
+	var minigameScores = {
+		"beans": false,
+		"grind": false,
+		"size": false,
+		"milk": false,
+		"flavouring": false
+	}
+
 	_f.music.changeBGM('minigame');
 
 	$('.beans').on('click', function(){
 		$('.beanSelect').fadeOut(500, function(){
-			$('.beanGrind').fadeIn(500);
+			$('.beanGrind').fadeIn(500, function(){
+				var grindBar = setInterval(function(){
+					if($('.progress-bar').width() > 0) {
+						$('.progress-bar').width($('.progress-bar').width()-1);
+					} else if($('.progress-bar').width() < 0) {
+						$('.progress-bar').width(0);
+					}
+				}, 10)
+				var counter = setInterval(function(){
+					$('.counter').text( parseInt($('.counter').text())-1 );
+				}, 1000);
+				setTimeout(function(){
+					clearInterval(grindBar);
+					clearInterval(counter);
+					minigameScores.grind = ($('.progress-bar').width() / 1770) * 100;
+				}, 10000);
+			});
 		});
 	});
 
 	$('.beanGrindBean').on('click', function(){
 		_f.music.playSFX('grind');
+
+		if($('.progress-bar').width()+100 < 1770) {
+			$('.progress-bar').width($('.progress-bar').width()+100);
+		} else {
+			$('.progress-bar').width(1770);
+		}
+
 	})
 </script>
