@@ -1,10 +1,10 @@
 {
   "main": "peony/index.html",
-  "name": "Project",
-  "description": "Project for OCR Advanced GCE in Computer Science",
+  "name": "Manvir's Milky Mochas",
+  "description": "Start and maintain your own coffee shop!",
   "version": "1.0.0",
   "window": {
-    "title": "Project",
+    "title": "Manvir's Milky Mochas",
     "icon": "peony/assets/icon.png",
     "frame": false,
     "width": 854,
