@@ -95,6 +95,7 @@ var _f = {
 	ui: {
 		modal: {
 			push: function(title, contents, actions) {
+
 				$('.vignette').fadeIn();
 
 				$('.modalContainer').show();
@@ -106,7 +107,7 @@ var _f = {
 				});
 
 				$('.modalContainer').prepend('<div class="modal" style="display: none"><div class="modal-title">'+title+'</div><div class="modal-contents">'+contents+'</div><ul class="modal-actions">'+actionsHtml+'</ul></div>');
-
+				_f.music.playSFX('modal');
 				$('.modal').effect('slide', {direction: 'down', duration: 350, mode: 'show'});
 			},
 
@@ -159,6 +160,8 @@ var _f = {
 		npcSpeechAdvance: function() {
 			// advance the speech bubble or dismiss it, based on the amount of messages left
 
+			_f.music.playSFX('click');
+
 			if($('.npcSpeechItem').length === 0) {
 				// there's nothing to do, as no NPC speech items are on screen.
 				return false;
@@ -184,6 +187,7 @@ var _f = {
 		},
 
 		toggleTray: function(callback) {
+			_f.music.playSFX('zip');
 			if($('.tray').attr('closed') == "true") {
 				// tray is closed, open it
 				_f.game.refreshItemStore();
@@ -227,6 +231,7 @@ var _f = {
 		},
 
 		destroyItem: function(uuid){
+			_f.music.playSFX('poof');
 			$('#item-'+uuid).remove();
 			var newShopArray = [];
 			gameSave.shop.forEach(function(res){
@@ -246,6 +251,7 @@ var _f = {
 		},
 
 		changeMoney: function(amount) {
+			_f.music.playSFX('money-change');
 			console.log('changing by '+amount);
 			gameSave.money = gameSave.money + amount;
 			_f.game.updateMoneyHud();
@@ -263,6 +269,7 @@ var _f = {
 		},
 
 		flipItem: function(uuid){
+			_f.music.playSFX('flip');
 			var itemReference = _f.game.getItemFromUUID(uuid);
 			if(itemReference.flipped === 0) {
 				itemReference.flipped = 1;
@@ -275,6 +282,7 @@ var _f = {
 		},
 
 		moveItem: function(uuid){
+			_f.music.playSFX('move-init');
 			$(document).on('mousemove', function(event){
 
 				if(sizeOf('peony/assets/shop1/p1.png').width < event.pageX+$('.content').scrollLeft() && (sizeOf('peony/assets/shop1/p3.png').width+gameSave.shopWidth) > event.pageX+$('.content').scrollLeft()) {
@@ -287,7 +295,7 @@ var _f = {
 
 			$('#item-'+uuid).click(function(event){
 				$(document).off('mousemove');
-
+				_f.music.playSFX('move-done');
 				var itemReference = _f.game.getItemFromUUID(uuid);
 				itemReference.position[0] = $('#item-'+uuid).position().left;
 				_f.system.save();
