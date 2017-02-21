@@ -204,7 +204,7 @@ var _f = {
 			// 40% - 60%: AVERAGE: $3.50 paid
 			// 60% - 80%: GOOD, $7.00 paid
 			// 80% - 100%: AMAZING, $14.00 paid
-
+			console.log(minigameScores);
 			var score = 0;
 
 			///// BEANS

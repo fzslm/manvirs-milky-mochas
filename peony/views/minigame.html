@@ -1,9 +1,9 @@
 <div class="viewContent">
 	<div class="beanSelect">
-		<button class="beans beans0"></button>
-		<button class="beans beans1"></button>
-		<button class="beans beans2"></button>
-		<button class="beans beans3"></button>
+		<button id="beans0" class="beans beans0"></button>
+		<button id="beans1" class="beans beans1"></button>
+		<button id="beans2" class="beans beans2"></button>
+		<button id="beans3" class="beans beans3"></button>
 	</div>
 	<div class="beanGrind">
 		<div class="counter">10</div>
@@ -47,7 +47,8 @@
 
 	_f.music.changeBGM('minigame');
 
-	$('.beans').on('click', function(){
+	$('.beans').on('click', function(e){
+		minigameScores.beans = e.toElement.id.substring(5);
 		$('.beanSelect').fadeOut(500, function(){
 			$('.beanGrind').fadeIn(500, function(){
 				var grindBar = setInterval(function(){
@@ -118,6 +119,7 @@
 								// the possible milk percentages go up in 10%s (i.e. 0%, 10%, 20%, ..., 100%)
 								// therefore we need to round milkAmount DOWN and convert it into a percentage.
 								var milkPercentage = (Math.floor(10 * milkAmount) / 10).toFixed(1)*100;
+								minigameScores.milk = milkPercentage;
 								// based on the milk percentage, we'll change the sprite that's displayed to the user.
 								$('.cupMilk').attr('class','').addClass('cupMilk cupMilk'+milkPercentage);
 								expectedButtonPress = 0; /* now up is expected */
