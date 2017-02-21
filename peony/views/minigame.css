@@ -138,10 +138,21 @@
 .cupMilk {
 	width: 302px;
 	height: 442px;
-	background-image: url(../assets/cup-full-milk0.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	left: 809px;
 	position: relative;
 	bottom: -56px;
 }
+
+.cupMilk0   { background-image: url(../assets/cup-full-milk0.png) }
+.cupMilk10  { background-image: url(../assets/cup-full-milk10.png) }
+.cupMilk20  { background-image: url(../assets/cup-full-milk20.png) }
+.cupMilk30  { background-image: url(../assets/cup-full-milk30.png) }
+.cupMilk40  { background-image: url(../assets/cup-full-milk40.png) }
+.cupMilk50  { background-image: url(../assets/cup-full-milk50.png) }
+.cupMilk60  { background-image: url(../assets/cup-full-milk60.png) }
+.cupMilk70  { background-image: url(../assets/cup-full-milk70.png) }
+.cupMilk80  { background-image: url(../assets/cup-full-milk80.png) }
+.cupMilk90  { background-image: url(../assets/cup-full-milk90.png) }
+.cupMilk100 { background-image: url(../assets/cup-full-milk100.png) }

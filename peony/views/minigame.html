@@ -21,7 +21,7 @@
 		<div class="udder">
 
 		</div>
-		<div class="cupMilk"></div>
+		<div class="cupMilk cupMilk0"></div>
 	</div>
 </div>
 
@@ -79,7 +79,7 @@
 		minigameScores.size = cupSize;
 		$('.cupSize').fadeOut(500, function(){
 			$('.milking').fadeIn(500, function(){
-
+				milkAmount = 0;
 				expectedButtonPress = 0;
 				/* this is used in the milking minigame to determine which key press is expected.
 				the player must press up and down repeatedly until the coffee has the right amount of milk,
@@ -103,6 +103,15 @@
 							if(expectedButtonPress == 1) {
 								// only run this code if down was expected.
 								_f.music.playSFX('milk'); // play the milking sound effect
+								milkAmount += 0.02; // changes the amount of milk.
+								if(milkAmount >= 100) {
+									milkAmount = 100; // 100% is the maximum amount of milk
+								}
+								// the possible milk percentages go up in 10%s (i.e. 0%, 10%, 20%, ..., 100%)
+								// therefore we need to round milkAmount DOWN and convert it into a percentage.
+								var milkPercentage = (Math.floor(10 * milkAmount) / 10).toFixed(1)*100;
+								// based on the milk percentage, we'll change the sprite that's displayed to the user.
+								$('.cupMilk').attr('class','').addClass('cupMilk cupMilk'+milkPercentage);
 								expectedButtonPress = 0; /* now up is expected */
 							}
 							break;
