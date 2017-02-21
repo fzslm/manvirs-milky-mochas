@@ -6,7 +6,7 @@ var itemDefinitions = [
 		"canNPCInteract": false,
 		"state": "default",
 		"dimensions": [282,271],
-		"position": [760,610],
+		"position": [240,430],
 		"image": "assets/cashregister.png",
 		"shouldDraw": true,
 		"canMove": false
