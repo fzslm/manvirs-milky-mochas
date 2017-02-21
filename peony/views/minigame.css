@@ -1,0 +1,40 @@
+.viewContent {
+	background-color: red;
+}
+
+.beanSelect {
+	max-height: 1080px;
+	min-height: 1080px;
+	max-width: 1920px;
+	min-width: 1920px;
+	position: relative;
+	background-image: url('../assets/beanSelect.png')
+}
+
+.beans {
+	position: absolute;
+	width: 394.4px;
+	height: 641.1px;
+	opacity: 0;
+	background-color: rgb(0,0,0);
+}
+
+.beans:active {
+	opacity: 0.5;
+}
+
+.beans0 {
+	left: 82.2px; top: 296.5px;
+}
+
+.beans1 {
+	left: 536.2px; top: 296.5px;
+}
+
+.beans2 {
+	left: 990.2px; top: 296.5px;
+}
+
+.beans3 {
+	left: 1444.2px; top: 296.5px;
+}
