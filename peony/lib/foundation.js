@@ -204,13 +204,11 @@ var _f = {
 			// 40% - 60%: AVERAGE: $3.50 paid
 			// 60% - 80%: GOOD, $7.00 paid
 			// 80% - 100%: AMAZING, $14.00 paid
-			console.log(minigameScores);
 			var score = 0;
 
 			///// BEANS
 			// did the player pick the right beans? +20 to score if they did, +0 if they didn't.
 			if(minigameScores.beans == desiredBeans) score+=20;
-			alert('Beans score added, score is now '+score);
 
 			///// GRINDING
 			// how well were the beans ground?
@@ -222,12 +220,10 @@ var _f = {
 			// we want the numbers to be the other way around, so we take away 1 and take the absolute value again. we now have the desired format.
 			// now add 20 * grindingScore to the total
 			score+=20*grindingScore;
-			alert('Grinding score added, score is now '+score);
-
+			
 			///// SIZE
 			// did the player pick the right size cup? +20 to score if they did, +0 if they didn't.
 			if(minigameScores.size == desiredSize) score+=20;
-			alert('Size score added, score is now '+score);
 
 			///// MILK
 			// was the right amount of milk added?
@@ -238,7 +234,6 @@ var _f = {
 			// difference will equal 1 if the exact right amount of milk was added, 0 if it was completely wrong
 			// multiply 20 * difference and add that to the score.
 			score+=20*difference;
-			alert('Milk score added, score is now '+score);
 
 			///// FLAVOURING/EXTRAS
 			// how correct were the user's choices?
@@ -254,7 +249,6 @@ var _f = {
 				extrasScore=20; // award +2 bonus if they got all of them right (3 * 6 = 18, so this triggers on 18pts)
 			}
 			score+=extrasScore;
-			alert('Extras score added, score is now '+score);
 
 			return score;
 		},
