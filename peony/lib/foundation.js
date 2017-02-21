@@ -200,8 +200,12 @@ var _f = {
 				$('.tray').attr('closed', 'true');
 				$('#trayButton').css('background', "url('assets/common/addItem.png')");
 				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, function(){
-					$('.trayContainer').hide();
+				$('.trayContainer').hide();
+				try{
 					callback();
+				} catch(err) {
+					/* there might not always be a callback! we use a try block so that the tray still deploys even if there is no callback. */
+				}
 				});
 			}
 		},
