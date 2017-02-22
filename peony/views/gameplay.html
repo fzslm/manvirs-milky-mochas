@@ -94,6 +94,7 @@ if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 			setTimeout(function(){
 				_f.game.npcSpeech('manvir', [47, 48, 49, 50], function(){
 					$('.imageButton').show();
+					gameSave.unlockedDecorations[1] = true; _f.game.refreshDecorationStore();
 				});
 			}, 1000);
 		})
@@ -157,5 +158,12 @@ function updateShopNameAndContinueTutorial() {
 	})
 }
 
+function tutorialEnding() {
+	$('.imageButton').remove();
+	_f.game.toggleTray();
+	_f.game.npcSpeech('manvir', [51, 52], function(){
+		gameSave.skipTitle = true; gameSave.unlockedItems = [false, true, true, true]; gameSave.unlockedDecorations = [true, true, true, true]; gameSave.tutorialComplete = true; _f.system.save(); win.reload();
+	})
+}
 
 </script>

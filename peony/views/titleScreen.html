@@ -1,6 +1,10 @@
 <link href="views/titleScreen.css" type="text/css" rel="stylesheet">
 
 <script>
+	if(gameSave.skipTitle) {
+		gameSave.skipTitle = false; _f.system.save();
+		_f.views.loadView('gameplay');
+	}
 	_f.music.changeBGM('menu');
 
 	function startGame(){
