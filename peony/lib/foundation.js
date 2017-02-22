@@ -472,10 +472,26 @@ var _f = {
 			_f.game.changeMoney(-decorationDefinitions[id].price);
 			_f.system.save();
 			_f.game.applyDecoration(id);
+			_f.game.refreshDecorationStore();
 		},
 
 		applyDecoration: function(id) {
-			alert(id);
+			gameSave.currentDecoration = "shop"+id;
+			_f.game.refreshDecoration();
+		},
+
+		refreshDecoration: function(){
+			$('.viewContent').css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p2.png")');
+
+			var widthPre = sizeOf('peony/assets/'+gameSave.currentDecoration+'/p1.png').width;
+			$('.shop-pre').css('min-width', widthPre).css('max-width', widthPre).css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p1.png")');
+
+			var widthPost = sizeOf('peony/assets/'+gameSave.currentDecoration+'/p3.png').width;
+			$('.shop-post').css('min-width', widthPost).css('max-width', widthPost).css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p3.png")');
+
+			$('.viewContent').css('min-width', gameSave.shopWidth+widthPost+widthPre+'px');
+			$('.viewContent').css('max-width', gameSave.shopWidth+widthPost+widthPre+'px');
+			$('.viewContent').css('background-position-x', widthPre+'px');
 		}
 	},
 
