@@ -230,6 +230,10 @@ ul.itemsList li.itemElement {
 	border-bottom: 2px solid grey;
 }
 
+ul.decorationsList li.itemElement {
+	border-bottom: 2px solid grey;
+}
+
 .moneyHud {
 	position: fixed;
 	right: 32px;

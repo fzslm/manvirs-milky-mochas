@@ -438,6 +438,44 @@ var _f = {
 
 		updateMoneyHud: function() {
 			$('.moneyText').text('$'+gameSave.money.toFixed(2));
+		},
+
+		refreshDecorationStore: function() {
+			var listHtml = "";
+			var onclick = "";
+			decorationDefinitions.forEach(function(res, i){
+
+				if(gameSave.purchasedDecorations[i]){
+					/* the user already owns this decoration, just apply it if they click it */
+					onclick = "_f.game.applyDecoration("+i+")";
+				} else {
+					/* the user doesn't own this decoration yet, buy it if they click */
+					onclick = "_f.game.confirmDecorationBuy("+i+")";
+				}
+
+				if(gameSave.unlockedDecorations[i]){
+					listHtml = listHtml + '<li onclick="'+onclick+'" id="item'+i+'" class="itemElement"><div class="itemImage" style="background: url(\''+res.preview+'\')"></div><div class="itemDetails"><span class="itemName">'+res.name+'</span><span class="itemDescription">'+res.description+' <span style="color: grey; padding-left: 2px;font-size: 32px">($'+res.price+')</span></span></div></li>';
+				}
+
+			});
+			$('#trayView-decorate').html('<ul class="decorationsList">'+listHtml+'</ul>');
+		},
+
+		confirmDecorationBuy: function(id) {
+			$('.buyButton').remove();
+			$('li#item'+id).append('<div onclick="_f.game.purchaseDecoration('+id+')" class="buyButton">Confirm Purchase</div>');
+		},
+
+		purchaseDecoration: function(id) {
+			$('.buyButton').remove();
+			gameSave.purchasedDecorations[id] = true;
+			_f.game.changeMoney(-decorationDefinitions[id].price);
+			_f.system.save();
+			_f.game.applyDecoration(id);
+		},
+
+		applyDecoration: function(id) {
+			alert(id);
 		}
 	},
 
