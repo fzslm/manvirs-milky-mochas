@@ -87,7 +87,7 @@ if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 	// player is still playing the tutorial, but has come back from the first minigame.
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
-	_f.game.npcSpeechFromScore(_f.game.judgeCoffee(2, 2, 50, [false, false, false, false, false, false]), 'npc1', function(){
+	_f.game.npcSpeechFromScore(_f.game.judgeCoffee(2, 2, 50, [false, false, false, false, false, false]), _f.game.currentNPCArray, function(){
 		$('.moneyHud').show();
 		_f.game.npcSpeech('manvir', [41, 42, 43, 44, 45, 46], function(){
 			_f.game.changeMoney(1000);
@@ -130,7 +130,8 @@ function updateShopNameAndContinueTutorial() {
 												$('.customerButton').show();
 												$('.customerButton').attr('onclick', '');
 												$('.customerButton').on('click', function(){
-													_f.game.npcSpeech('npc1', "Erm, hi. Let's see... I'd like a large coffee with the Strong Manvir beans. Oh, and some extra Mandhu Milk please. But not too much! I've just had my fill!", function(){
+													_f.game.currentNPCArray = _f.game.returnRandomNPCArray();
+													_f.game.npcSpeech(_f.game.currentNPCArray, "Erm, hi. Let's see... I'd like a large coffee with the Strong Manvir beans. Oh, and some extra Mandhu Milk please. But not too much! I've just had my fill!", function(){
 														_f.game.npcSpeech('manvir', [14,15], function(){
 															_f.music.playSFX('coffee-start');
 															_f.views.loadView('minigame', {

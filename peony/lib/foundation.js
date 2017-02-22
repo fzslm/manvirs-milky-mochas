@@ -154,7 +154,7 @@ var _f = {
 			_f.game.npcSpeechCallback = callback;
 
 			if(typeof(npc) == "object") {
-				$('.npcLayer').html('<div class="npcHead"></div><div class="npcBody"></div><div class="npcLegs"></div><div class="npcBoots"></div>');
+				$('.npcLayer').html('<div style="background-image: url(\'assets/npc/head'+npc[0]+'.png\')" class="npcHead"></div><div style="background-image: url(\'assets/npc/body'+npc[1]+'.png\')" class="npcBody"></div><div style="background-image: url(\'assets/npc/legs'+npc[2]+'.png\')" class="npcLegs"></div><div style="background-image: url(\'assets/npc/boots'+npc[3]+'.png\')" class="npcBoots"></div>');
 			} else {
 				// load NPC image from string
 				$('.npcLayer').html('<div style="background-image: url(assets/'+npc+'.png);" class="npcImage"></div>');
@@ -190,6 +190,8 @@ var _f = {
 			$('.npcSpeech').effect('slide', {direction: 'left', duration: 150, mode: 'show'});
 
 		},
+
+		currentNPCArray: [],
 
 		npcSpeechAdvance: function() {
 			// advance the speech bubble or dismiss it, based on the amount of messages left
@@ -508,7 +510,7 @@ var _f = {
 		},
 
 		returnRandomNPCArray: function(){
-			return [_f.randomIntFromInterval(1,3),_f.randomIntFromInterval(1,3),_f.randomIntFromInterval(1,3),_f.randomIntFromInterval(1,3)];
+			return [_f.misc.randomIntFromInterval(1,3),_f.misc.randomIntFromInterval(1,3),_f.misc.randomIntFromInterval(1,3),_f.misc.randomIntFromInterval(1,3)];
 		}
 	},
 

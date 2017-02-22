@@ -54,17 +54,33 @@
 }
 
 .npcHead {
-
+	width: 242px;
+	height: 233px;
+	position: absolute;
+	top: 82px;
+	left: 1450px;
 }
 
 .npcBody {
-
+	width: 217px;
+	height: 288px;
+	position: absolute;
+	left: 1480px;
+	top: 330px;
 }
 
 .npcLegs {
-
+	width: 135px;
+	height: 262px;
+	position: absolute;
+	left: 1520px;
+	top: 610px;
 }
 
 .npcBoots {
-
+	width: 228px;
+    height: 44px;
+    position: absolute;
+    left: 1440px;
+    top: 900px;
 }
