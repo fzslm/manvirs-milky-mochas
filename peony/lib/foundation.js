@@ -157,7 +157,7 @@ var _f = {
 				$('.npcLayer').html('<div class="npcHead"></div><div class="npcBody"></div><div class="npcLegs"></div><div class="npcBoots"></div>');
 			} else {
 				// load NPC image from string
-				$('.npcLayer').html('<div style="background-image: url(../assets/'+npc+'.png);" class="npcImage"></div>');
+				$('.npcLayer').html('<div style="background-image: url(assets/'+npc+'.png);" class="npcImage"></div>');
 			}
 
 			$('.npcLayer').append('<div onclick="_f.game.npcSpeechAdvance();" class="npcSpeech"></div>');
