@@ -368,10 +368,15 @@ var _f = {
 
 		purchaseItem: function(id, calledFromTutorial) {
 			$('.buyButton').remove();
-			if(!calledFromTutorial) _f.game.toggleTray();
-			gameSave.shop.push(new Item(id));
-			_f.game.changeMoney(-itemDefinitions[id].price);
-			_f.system.save();
+			if(itemDefinitions[id].price > gameSave.money) {
+				alert("You don't have enough money to buy that!");
+			} else {
+				if(!calledFromTutorial) _f.game.toggleTray();
+				gameSave.shop.push(new Item(id));
+				_f.game.changeMoney(-itemDefinitions[id].price);
+				_f.system.save();
+			}
+
 		},
 
 		destroyItem: function(uuid){
@@ -479,14 +484,18 @@ var _f = {
 		purchaseDecoration: function(id, callback) {
 			$('.buyButton').remove();
 			gameSave.purchasedDecorations[id] = true;
-			_f.game.changeMoney(-decorationDefinitions[id].price);
-			_f.system.save();
-			_f.game.applyDecoration(id);
-			_f.game.refreshDecorationStore();
-			if(gameSave.tutorialComplete) {
-				_f.game.toggleTray();
+			if(decorationDefinitions[id].price > gameSave.money) {
+				alert("You don't have enough money to buy that!");
 			} else {
-				tutorialEnding();
+				_f.game.changeMoney(-decorationDefinitions[id].price);
+				_f.system.save();
+				_f.game.applyDecoration(id);
+				_f.game.refreshDecorationStore();
+				if(gameSave.tutorialComplete) {
+					_f.game.toggleTray();
+				} else {
+					tutorialEnding();
+				}
 			}
 		},
 
