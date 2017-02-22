@@ -130,6 +130,7 @@ function updateShopNameAndContinueTutorial() {
 							_f.game.toggleTray(function(){
 								_f.game.purchaseItem(0, true);
 								setTimeout(function(){
+									gameSave.unlockedItems[0] = false; _f.system.save(); /* disable the cash register from being bought */
 									_f.game.npcSpeech('manvir', [9], function(){
 										_f.music.playSFX('customer', function(){
 											_f.game.npcSpeech('manvir', [10,11,12], function(){
