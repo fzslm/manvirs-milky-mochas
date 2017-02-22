@@ -53,7 +53,7 @@ var _f = {
 				"shopName": "",
 				"started": false,
 				"tutorialComplete": false,
-				"money": 1000,
+				"money": 1,
 				"level": 1,
 				"shop": [],
 				"shopWidth": 2560,
