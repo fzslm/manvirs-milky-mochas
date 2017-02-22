@@ -146,7 +146,7 @@ var _f = {
 	game: {
 		npcSpeech: function(npc,message, callback){
 			// shows an NPC speaking certain message(s)
-			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere.", "<strong>WHAT?</strong> I <strong>specifically</strong> said NO customers today! Oh, I'm angry. And you wouldn't like me when I'm angry.","<em>sighs</em> Well, I suppose I will have to teach you how to make coffee!", "You'll know you have a customer when you see that little dollar sign in the bottom-right corner. Tap it to ask the customer what they want!", "He-he-he!", "Yeah, these guys are <small>really</small> particular about their coffee. It drives me insane. There's this one guy who always asks for tons of milk. Says it adds extra lactose or something like that...", "Anyway, never mind about that. Hope you remembered what that guy just ordered, because I'm not reminding you. Let's make some coffee!", "<em>slurp</em>", "This coffee is amazing! It's exactly what I wanted!", "...Wow! I wasn't expecting it to be this good!", "Oh my god! It's perfect!", "Yeah! This is real coffee!", "Wow! This is incredible!", "...Mmm! This is good!", "This is nice! I'd certainly drink this again!", "Mmm! This is some damn fine coffee!", "I'm impressed, $PLAYERNAME! This tastes great!", "Nice work! This is a great coffee!", "...Ehh... I suppose it's alright. I've certainly had better.", "... It could be worse, but it could definitely be better...", "Coffee's coffee, but I don't know about this one...", "It has potential, but I think something's missing...", "...I guess it's drinkable. The question is - do I <em>really</em> want to drink it?", "... $PLAYERNAME, I know you're new and all that, but come on now. This is awful.", "Did you even add the coffee beans, $PLAYERNAME? Because I can barely taste them.", "What's in this? It's just that I don't think I like it very much.", "... Ugh! This is really bad.", "... I'm not paying for this. I genuinely think I'm going to throw up everywhere.", "Are you trying to kill me or something? This is some of the worst coffee I've ever had in my life. In fact, no, I think it <em>is</em> the worst.", "I don't feel well. Is there a hospital near here? It's just that I think I have food poisoning now, $PLAYERNAME. And if it turns out I do, I'm suing you.", "Well, there goes the prestige of what was once <strong>MANVIR'S MILKY MOCHAS</strong>. Don't expect me to be back here again.", "Can I ask a quick question? How exactly did you screw up this bad?"];
+			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere.", "<strong>WHAT?</strong> I <strong>specifically</strong> said NO customers today! Oh, I'm angry. And you wouldn't like me when I'm angry.","<em>sighs</em> Well, I suppose I will have to teach you how to make coffee!", "You'll know you have a customer when you see that little dollar sign in the bottom-right corner. Tap it to ask the customer what they want!", "He-he-he!", "Yeah, these guys are <small>really</small> particular about their coffee. It drives me insane. There's this one guy who always asks for tons of milk. Says it adds extra lactose or something like that...", "Anyway, never mind about that. Hope you remembered what that guy just ordered, because I'm not reminding you. Let's make some coffee!", "<em>slurp</em>", "This coffee is amazing! It's exactly what I wanted!", "...Wow! I wasn't expecting it to be this good!", "Oh my god! It's perfect!", "Yeah! This is real coffee!", "Wow! This is incredible!", "...Mmm! This is good!", "This is nice! I'd certainly drink this again!", "Mmm! This is some damn fine coffee!", "I'm impressed, $PLAYERNAME! This tastes great!", "Nice work! This is a great coffee!", "...Ehh... I suppose it's alright. I've certainly had better.", "... It could be worse, but it could definitely be better...", "Coffee's coffee, but I don't know about this one...", "It has potential, but I think something's missing...", "...I guess it's drinkable. The question is - do I <em>really</em> want to drink it?", "... $PLAYERNAME, I know you're new and all that, but come on now. This is awful.", "Did you even add the coffee beans, $PLAYERNAME? Because I can barely taste them.", "What's in this? It's just that I don't think I like it very much.", "... Ugh! This is really bad.", "... I'm not paying for this. I genuinely think I'm going to throw up everywhere.", "Are you trying to kill me or something? This is some of the worst coffee I've ever had in my life. In fact, no, I think it <em>is</em> the worst.", "I don't feel well. Is there a hospital near here? It's just that I think I have food poisoning now, $PLAYERNAME. And if it turns out I do, I'm suing you.", "Well, there goes the prestige of what was once <strong>MANVIR'S MILKY MOCHAS</strong>. Don't expect me to be back here again.", "Can I ask a quick question? How exactly did you screw up this bad?", "The money you make from a coffee depends on how well you made it. If you made it bad enough, you might not make any money at all. So don't screw it up!", "The amount of money you have shows up in the top-right corner of your screen. And -- wait. You only have $MONEY? I guess I could help you out... if you do me a favour.", "Recently I've been running into some issues with the law. They seem to think they can make <strong>MANVIR</strong> pay his bills and his loans!", "So the bank men came out the other day and they took all of my furniture. Like I said, they even took the carpet! And needless to say, I'm less than pleased.", "I've got a great plan to show them who's boss, but it requires me to leave this branch behind. Would you be willing to take ownership of this place?", "Oh wait, you haven't got a choice. Congratulations - this place is yours! Now, here's $1000 to start you off. Spend it wisely, 'cause I won't be helping you out again!"];
 
 			_f.game.npcSpeechCallback = callback;
 
@@ -260,6 +260,51 @@ var _f = {
 			score+=extrasScore;
 
 			return score;
+		},
+
+		npcSpeechFromScore: function(score, npc, callback){
+			/* uses a coffee judging score to put an appropriate message on screen, and add the right amount of money. */
+			// 0 - 20%: AWFUL. no payment
+			// 20% - 40%: BAD, $2.00 paid
+			// 40% - 60%: AVERAGE: $3.50 paid
+			// 60% - 80%: GOOD, $7.00 paid
+			// 80% - 100%: AMAZING, $14.00 paid
+
+			var messageIndex = false;
+			var changeMoneyBy = false;
+			switch(true){
+				case (score < 20):
+					messageIndex = _f.misc.randomIntFromInterval(36, 40);
+					changeMoneyBy = 0;
+					break;
+				case (score < 40):
+					messageIndex = _f.misc.randomIntFromInterval(32, 36);
+					changeMoneyBy = 2.00;
+					break;
+				case (score < 60):
+					messageIndex = _f.misc.randomIntFromInterval(27, 31);
+					changeMoneyBy = 3.50;
+					break;
+				case (score < 80):
+					messageIndex = _f.misc.randomIntFromInterval(22, 26);
+					changeMoneyBy = 7.00;
+					break;
+				case (score < 100):
+					messageIndex = _f.misc.randomIntFromInterval(17, 21);
+					changeMoneyBy = 14.00;
+					break;
+			}
+
+			_f.game.npcSpeech(npc, [messageIndex], function(){
+				if(changeMoneyBy !== 0) {
+					_f.game.changeMoney(changeMoneyBy);
+				}
+					try{
+						callback();
+					} catch(e) {
+
+					}
+			});
 		},
 
 		updateName: function(name) {
@@ -406,6 +451,11 @@ var _f = {
 			if(s < 10) {s = "0" + s;}
 			if(ms < 10) {ms = "00" + ms;} else if(ms < 100) {ms = "0" + ms;}
 			return h+":"+m+":"+s + "." +ms;
+		},
+
+		randomIntFromInterval: function(min, max) {
+			// returns a random integer between min and max
+    		return Math.floor(Math.random()*(max-min+1)+min);
 		}
 	},
 

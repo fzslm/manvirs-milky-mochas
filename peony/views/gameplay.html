@@ -97,7 +97,11 @@ if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 	// player is still playing the tutorial, but has come back from the first minigame.
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
-	alert(_f.game.judgeCoffee(2, 2, 50, [false, false, false, false, false, false]));
+	_f.game.npcSpeechFromScore(_f.game.judgeCoffee(2, 2, 50, [false, false, false, false, false, false]), 'npc1', function(){
+		_f.game.npcSpeech('manvir', [41, 42, 43, 44, 45, 46], function(){
+
+		})
+	});
 }
 
 function updateShopNameAndContinueTutorial() {
