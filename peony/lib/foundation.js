@@ -321,6 +321,7 @@ var _f = {
 			if($('.tray').attr('closed') == "true") {
 				// tray is closed, open it
 				_f.game.refreshItemStore();
+				_f.game.refreshDecorationStore();
 				$('.tray').attr('closed', 'false');
 				$('#trayButton').css('background', "url('assets/common/back.png')");
 				$('.trayContainer').show();
