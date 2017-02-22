@@ -418,7 +418,7 @@ var _f = {
 			_f.music.playSFX('move-init');
 			$(document).on('mousemove', function(event){
 
-				if(sizeOf('peony/assets/shop0/p1.png').width < event.pageX+$('.content').scrollLeft() && (sizeOf('peony/assets/shop0/p3.png').width+gameSave.shopWidth) > event.pageX+$('.content').scrollLeft()) {
+				if(sizeOf('peony/assets/'+gameSave.currentDecoration+'/p1.png').width < event.pageX+$('.content').scrollLeft() && (sizeOf('peony/assets/'+gameSave.currentDecoration+'/p3.png').width+gameSave.shopWidth) > event.pageX+$('.content').scrollLeft()) {
 
 					$('#item-'+uuid).css('left', event.pageX+$('.content').scrollLeft()-($('#item-'+uuid).width()/2)+'px');
 
