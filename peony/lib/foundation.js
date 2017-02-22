@@ -59,6 +59,7 @@ var _f = {
 				"shopWidth": 2560,
 				"unlockedItems": [true, false, false, false],
 				"unlockedDecorations": [false, false, false, false],
+				"purchasedDecorations": [true, false, false, false],
 				"currentDecoration": "shop0",
 				"lastPlayed": Date.now()
 			};
