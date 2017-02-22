@@ -98,8 +98,14 @@ if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 	$('.moneyHud').hide();
 	$('.imageButton').hide();
 	_f.game.npcSpeechFromScore(_f.game.judgeCoffee(2, 2, 50, [false, false, false, false, false, false]), 'npc1', function(){
+		$('.moneyHud').show();
 		_f.game.npcSpeech('manvir', [41, 42, 43, 44, 45, 46], function(){
-
+			_f.game.changeMoney(1000);
+			setTimeout(function(){
+				_f.game.npcSpeech('manvir', [47, 48, 49, 50], function(){
+					$('.imageButton').show();
+				});
+			}, 1000);
 		})
 	});
 }
