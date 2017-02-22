@@ -58,6 +58,8 @@ var _f = {
 				"shop": [],
 				"shopWidth": 2560,
 				"unlockedItems": [true, false, false, false],
+				"unlockedDecorations": [false, false, false, false],
+				"currentDecoration": "shop0",
 				"lastPlayed": Date.now()
 			};
 			jsonfile.writeFileSync('peony/save.json', gameSave);
