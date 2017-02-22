@@ -498,6 +498,10 @@ var _f = {
 			$('.viewContent').css('min-width', gameSave.shopWidth+widthPost+widthPre+'px');
 			$('.viewContent').css('max-width', gameSave.shopWidth+widthPost+widthPre+'px');
 			$('.viewContent').css('background-position-x', widthPre+'px');
+		},
+
+		returnRandomNPCArray: function(){
+			return [_f.randomIntFromInterval(1,3),_f.randomIntFromInterval(1,3),_f.randomIntFromInterval(1,3),_f.randomIntFromInterval(1,3)];
 		}
 	},
 
