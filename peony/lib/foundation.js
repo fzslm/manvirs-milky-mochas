@@ -153,7 +153,14 @@ var _f = {
 
 			_f.game.npcSpeechCallback = callback;
 
-			$('.npcLayer').html('<div class="npcImage"></div><div onclick="_f.game.npcSpeechAdvance();" class="npcSpeech"></div>');
+			if(typeof(npc) == "object") {
+				$('.npcLayer').html('<div class="npcHead"></div><div class="npcBody"></div><div class="npcLegs"></div><div class="npcBoots"></div>');
+			} else {
+				// load NPC image from string
+				$('.npcLayer').html('<div style="background-image: url(../assets/'+npc+'.png);" class="npcImage"></div>');
+			}
+
+			$('.npcLayer').append('<div onclick="_f.game.npcSpeechAdvance();" class="npcSpeech"></div>');
 
 			if(typeof(message) == "string") {
 				// the message is a single string

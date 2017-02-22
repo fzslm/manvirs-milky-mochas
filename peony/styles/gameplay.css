@@ -48,8 +48,23 @@
     min-width: 740px;
     left: 1212px;
     position: absolute;
-    background-image: url(../assets/manvir.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.npcHead {
+
+}
+
+.npcBody {
+
+}
+
+.npcLegs {
+
+}
+
+.npcBoots {
+
 }
