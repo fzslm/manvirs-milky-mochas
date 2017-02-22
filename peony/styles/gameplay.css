@@ -84,3 +84,8 @@
     left: 1440px;
     top: 900px;
 }
+
+.item {
+	background-size: cover !important;
+	background-position: center !important;
+}

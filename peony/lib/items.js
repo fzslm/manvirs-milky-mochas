@@ -42,16 +42,16 @@ var itemDefinitions = [
 		"canMove": true
 	},
 	{
-		"name": "Kettle",
-		"description": "Buying more kettles will speed up the rate of production of hot water. We don't know why they're $1500. Blame Brexit.",
-		"price": 1500,
+		"name": "Plant Pot",
+		"description": "A plant pot. A pot containing a plant. Plant pot pot plant. Pot pot plant plant.",
+		"price": 50,
 		"canNPCInteract": false,
 		"state": "default",
-		"dimensions": [237, 240],
-		"position": [760,610],
-		"image": "assets/kettle.png",
-		"shouldDraw": false,
-		"canMove": false
+		"dimensions": [130, 240],
+		"position": [760,710],
+		"image": "assets/plant-pot.png",
+		"shouldDraw": true,
+		"canMove": true
 	}
 ];
 
