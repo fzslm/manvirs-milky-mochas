@@ -55,6 +55,34 @@ var itemDefinitions = [
 	}
 ];
 
+var decorationDefinitions = [
+	{
+		"name": "Decrepit",
+		"description": "It looks like this place has been unused for years...",
+		"price": 0,
+		"internalName": "shop0"
+	},
+	{
+		"name": "Classic",
+		"description": "A simple, clean backdrop.",
+		"price": 750,
+		"internalName": "shop1"
+	},
+	{
+		"name": "Prison",
+		"description": "Imprisoning your customers - is there a better way to keep your customers loyal?",
+		"price": 1500,
+		"internalName": "shop2"
+	},
+	{
+		"name": "Modern",
+		"description": "Who said the future had to be a dystopia?",
+		"price": 1500,
+		"internalName": "shop3"
+	}
+
+];
+
 function Item(id) {
 	this.name = itemDefinitions[id].name;
 	this.description = itemDefinitions[id].description;
