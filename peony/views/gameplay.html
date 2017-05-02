@@ -1,78 +1,102 @@
 <div class="viewContent">
-	<div class="npcLayer" style="display: none;"></div>
-	<div class="shop-pre"></div>
-	<div class="shop-post"></div>
-	<button class="imageButton" id="trayButton" style="bottom:32px;left:32px;background:url('assets/common/addItem.png')" onclick="_f.game.toggleTray();"></button>
-	<button class="customerButton" style="display:none;bottom:32px;right:32px;background:url('assets/common/customer.png')" onclick="_f.game.checkCustomer();"></button>
+	<div class="npcLayer" style="display: none;">
+		<!-- this "NPC Layer" is how speech is displayed on-screen. a sprite displaying the NPC that is speaking, and the speech itself, is displayed inside this DIV -->
+	</div>
+	<div class="shop-pre">
+		<!-- this DIV is used to draw the first part of the shop sprite. -->
+	</div>
+	<div class="shop-post">
+		<!-- this DIV is used to draw the third part of the shop background. the second part is set as the background, causing a looping effect -->
+	</div>
+	<button class="imageButton" id="trayButton" style="bottom:32px;left:32px;background:url('assets/common/addItem.png')" onclick="_f.game.toggleTray();">
+		<!-- clicking this button causes the item tray to be toggled. -->
+	</button>
+	<button class="customerButton" style="display:none;bottom:32px;right:32px;background:url('assets/common/customer.png')" onclick="_f.game.checkCustomer();">
+		<!-- clicking this button summons a customer to the screen. this is only displayed when a customer is present. -->
+	</button>
 	<div class="moneyHud"><div class="moneyIcon"></div><div class="moneyText"></div></div>
+	<!-- contains the money HUD, which is made up of a money icon and the money text itself -->
 </div>
 
 <script>
 
-_f.music.changeBGM('game');
-_f.game.refreshDecoration();
-_f.game.updateMoneyHud();
+	// this code is run when the player chooses to start the game from the main menu.
+
+_f.music.changeBGM('game');	// changes to the main gameplay music
+_f.game.refreshDecoration();	// loads the decoration set in the save file, and sets it as the bg image and changes shop-pre/shop-post
+_f.game.updateMoneyHud();	// refreshes the money HUD to display the amount of money the player has.
 
 gameSave.shop.forEach(function(res){
 	if(res.shouldDraw) {
+		// for each item that the player has purchased, draw it on the screen (but only if it should be visible.)
 		$('.viewContent').append('<div class="item" style="width: '+res.dimensions[0]+'px; height: '+res.dimensions[1]+'px; top: '+res.position[1]+'px; left: '+res.position[0]+'px; position: absolute; background: url(\''+res.image+'\')" id="item-'+res.uuid+'"></div>');
+		// this draws a new div with class "item" to the screen, with all of the attributes stored in the save file.
 	}
 
+	// specify methods for each object:
 	res.destroy = function(){_f.game.destroyItem(this.uuid);};
 	res.interaction = itemDefinitions[res.id].interaction;
 	res.sell = function(){_f.game.sellItem(this.uuid);};
 	res.flip = function(){_f.game.flipItem(this.uuid);};
 
+
 	if(res.flipped == 1) {
+		// if the item is stored as flipped in the game savefile, apply the CSS rule below to it. this causes it to be flipped laterally
 		$('#item-'+res.uuid).css('transform', 'scaleX(-1)');
 	}
 
 });
 
 $('.content').mousewheel(function(e, delta) {
+		// when the player moves their mouse wheel, move left/right by the moved amount.
     $(this).scrollLeft(this.scrollLeft + (-delta * 40));
     e.preventDefault();
 });
 
 $('li').on('click', function(res) {
-	$('.trayOptions ul li').removeClass('active');
-	$('#'+res.target.id).addClass('active');
-	$('.trayView').hide();
-	$('#trayView-'+res.target.id).show();
+	// this code is responsible for switching between tray items (decorate / items tabs)
+	$('.trayOptions ul li').removeClass('active');	// remove the "active" class from all of the tab icons.
+	$('#'+res.target.id).addClass('active');				// adds the "active" class to the tab that the player selected. causes it to light up.
+	$('.trayView').hide();													// hides all of the views (makes both decorate / items invisibile)
+	$('#trayView-'+res.target.id).show();						// shows the view that the player selected
 })
 
 
 $(document).on("contextmenu", ".item", function(e){
 
-	var itemReference = _f.game.getItemFromUUID(e.target.id.substring(5));
-	var sellPrice = (itemReference.price / 4 )* 3;
-	var menu = new gui.Menu();
-	menu.append(new gui.MenuItem({ label: itemReference.name, enabled: false}));
+	// this code controls the context menu displayed when an item is right-clicked.
+
+	var itemReference = _f.game.getItemFromUUID(e.target.id.substring(5));		// gets the item's object
+	var sellPrice = (itemReference.price / 4 )* 3;		// check how much the player would get if they were to sell that item (3/4 of the original price)
+	var menu = new gui.Menu();	// start creating the menu object
+	menu.append(new gui.MenuItem({ label: itemReference.name, enabled: false}));			// add the item name to the context menu
 	if(itemReference.canMove) {
+		// if the item is movable, add the "Flip" and "Move" context items to the contextual menu
 		menu.append(new gui.MenuItem({ type: 'separator' }));
 		menu.append(new gui.MenuItem({ label: 'Flip', click: function(){
 			itemReference.flip();
 		}}));
 		menu.append(new gui.MenuItem({ label: 'Move', click: function(){
-			_f.game.moveItem(e.target.id.substring(5));
+			_f.game.moveItem(e.target.id.substring(5));			// e.target.id.substring(5) gets the item's UUID, as it removes 5 chars from the ID of the div. the div's ID is always item-{UUID} - so removing the first five chars will always return the item's UUID.
 		} }));
 	}
 	if(itemReference.price > 0) {
+		// if the player purchased the item (i.e. it's not the cash register), add the Sell context item to the contextual menu.
 		menu.append(new gui.MenuItem({ type: 'separator' }));
 		menu.append(new gui.MenuItem({ label: 'Sell ($'+sellPrice.toFixed(2)+')', click: function(){itemReference.sell();}}));
 	}
-	console.log(e);
-	menu.popup(e.pageX, e.pageY);
-	return false;
+	menu.popup(e.pageX, e.pageY);			// display the context menu at the place where the player right-clicked.
+	return false;											// prevents the default action from occurring. has no effect in production builds of the game, but the SDK version of NW.js would display its own context menu. this code prevents that from happening.
 });
 
 if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 	// only run this if the player hasn't completed the tutorial, AND they haven't just come back from the first minigame
-	$('.moneyHud').hide();
-	$('.imageButton').hide();
+	$('.moneyHud').hide();			// hide the money hud
+	$('.imageButton').hide();		// hide the tray button
 	setTimeout(function(){_f.game.npcSpeech('manvir', [0, 1, 2], function(){
+		// start the tutorial
 		setTimeout(function(){
-			/* run this after 1s */
+			/* run this after 1s - asks the player for the shop name */
 			_f.game.npcSpeech('manvir', [3, 4], function(){
 				_f.ui.modal.push("Well? What are you going to call your shop?", "<p>Be careful picking this - you won't be able to change it later!</p><input type=\"text\" id=\"name\" name=\"name\"></input>", [
 					{
@@ -85,17 +109,18 @@ if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 	})}, 500); /* run this after 500ms */
 } else if(!gameSave.tutorialComplete && typeof(minigameScores) == "object") {
 	// player is still playing the tutorial, but has come back from the first minigame.
-	$('.moneyHud').hide();
-	$('.imageButton').hide();
+	$('.moneyHud').hide();			// hide the money HUD, as the view has just reloaded. it will currently be visible
+	$('.imageButton').hide();		// hide the tray button.
 	_f.game.npcSpeechFromScore(_f.game.judgeCoffee(2, 2, 50, [false, false, false, false, false, false]), _f.game.currentNPCArray, function(){
-		$('.moneyHud').show();
+		// creates a speech bubble based on how the player did in the last minigame. the coffee judging algorithm is invoked here. _f.game.currentNPCArray is an object representing the NPC that ordered the coffee.
+		$('.moneyHud').show();		// show the money HUD again, as the tutorial is now walking the player through money.
 		_f.game.npcSpeech('manvir', [41, 42, 43, 44, 45, 46], function(){
-			_f.game.changeMoney(1000);
+			_f.game.changeMoney(1000);	// give the player £1000 to allow them to purchase a decoration
 			setTimeout(function(){
 				_f.game.npcSpeech('manvir', [47, 48, 49, 50], function(){
-					$('.imageButton').show();
-					$('.trayOptions #decorate').show();
-					gameSave.unlockedDecorations[1] = true; _f.game.refreshDecorationStore();
+					$('.imageButton').show();			// show the tray button, as they need to purchase a decoration
+					$('.trayOptions #decorate').show();			// show the Decorate tab, which was previously unavailable to the player./
+					gameSave.unlockedDecorations[1] = true; _f.game.refreshDecorationStore();			// unlock a decoration for the player to purchase, then reload the store so the changes are visible.
 				});
 			}, 1000);
 		})
@@ -103,44 +128,44 @@ if(!gameSave.tutorialComplete && typeof(minigameScores) == "undefined") {
 }
 
 function updateShopNameAndContinueTutorial() {
-	gameSave.shopName = $('#name').val();
-	_f.system.save();
+	// the player has just chosen a shop name.
+	gameSave.shopName = $('#name').val();			// add the new shop name to the save file
+	_f.system.save();		// and then commit those changes to disk
 	_f.game.npcSpeech('manvir', [5, 6, 7], function() {
-		$('.imageButton').attr('onclick', '');
-		$('.imageButton').show();
-		$('.trayOptions #decorate').hide();
-		$('.imageButton').on('click', function(){
+		$('.imageButton').attr('onclick', '');			// stops the tray button from deploying the tray. we'll remap this so that the tutorial continues when the player clicks it, instead
+		$('.imageButton').show();									// show the tray button
+		$('.trayOptions #decorate').hide();		//hides the decorate tab, as the player doesn't need it yet
+		$('.imageButton').on('click', function(){			// remaps the tray button to continue the tutorial
 			_f.game.npcSpeech('manvir', [8], function(){
-				$('.imageButton').hide();
+				$('.imageButton').hide();				// hide the tray button so that the player has no choice but to buy the item they're being asked to buy.
 				_f.game.toggleTray(function(){
 
-					$('.itemElement').attr('onclick', '');
+					$('.itemElement').attr('onclick', '');				// remove the default action from the cash register item in the store, as we need to remap that to continue the tutorial too.
 					$('.itemElement').on('click', function() {
 
-						_f.game.confirmBuy(0);
+						_f.game.confirmBuy(0);				// show the "CONFIRM PURCHASE" button when cashregister is clicked
 						$('.buyButton').attr('onclick', '');
-						$('.buyButton').on('click', function() {
+						$('.buyButton').on('click', function() {		// when the player chooses to confirm the purchase, hide the tray for them and continue the tutorial
 							_f.game.toggleTray(function(){
-								_f.game.purchaseItem(0, true);
+								_f.game.purchaseItem(0, true);				// adds the item to the game stage
 								setTimeout(function(){
-									gameSave.unlockedItems[0] = false; _f.system.save(); /* disable the cash register from being bought */
+									gameSave.unlockedItems[0] = false; _f.system.save(); /* disable the cash register from being bought again in the future. */
 									_f.game.npcSpeech('manvir', [9], function(){
-										_f.music.playSFX('customer', function(){
+										_f.music.playSFX('customer', function(){			// plays the "customer entered" SFX, as it's needed during the tutorial.
 											_f.game.npcSpeech('manvir', [10,11,12], function(){
-												$('.customerButton').show();
-												$('.customerButton').attr('onclick', '');
-												$('.customerButton').on('click', function(){
-													_f.game.currentNPCArray = _f.game.returnRandomNPCArray();
+												$('.customerButton').show();						// shows the customer button (i.e. a customer is waiting to be served)
+												$('.customerButton').attr('onclick', '');			// disable the default action, which is to randomly generate an order. the tutorial order is always the same.
+												$('.customerButton').on('click', function(){			// when the player clicks the customer button, give the player the hardcoded order.
+													_f.game.currentNPCArray = _f.game.returnRandomNPCArray();		// create a new random NPC object.
 													_f.game.npcSpeech(_f.game.currentNPCArray, "Erm, hi. Let's see... I'd like a large coffee with the Strong Manvir beans. Oh, and some extra Mandhu Milk please. But not too much! I've just had my fill!", function(){
 														_f.game.npcSpeech('manvir', [14,15], function(){
-															_f.music.playSFX('coffee-start');
+															_f.music.playSFX('coffee-start');				// plays the "minigame start" SFX.
 															_f.views.loadView('minigame', {
-																"beans": 0,
-																"milk": 2,
-																"sugar": 0,
-																"cream": false,
-																"flavouring": false
-															});
+																"beans": 3,		// strong manvir beans
+																"cupsize": 2,	// large cup
+																"milk": 0.5,	// 50% milk
+																"extras": [false, false, false, false, false, false] // no extras
+															});		// load the minigame view, with the hardcoded order
 														})
 													});
 												})
@@ -162,10 +187,15 @@ function updateShopNameAndContinueTutorial() {
 }
 
 function tutorialEnding() {
-	$('.imageButton').remove();
-	_f.game.toggleTray();
+	// tutorial is finished.
+	$('.imageButton').remove();			// remove the tray button, as the player has just added a decoration and we need to prevent them from doing it again.
+	_f.game.toggleTray();			// hide the tray
 	_f.game.npcSpeech('manvir', [51, 52], function(){
 		gameSave.skipTitle = true; gameSave.unlockedItems = [false, true, true, true]; gameSave.unlockedDecorations = [true, true, true, true]; gameSave.tutorialComplete = true; _f.system.save(); win.reload();
+		// sets skipTitle to true, causing the title screen to be skipped next time the game restarts. (more on that later)
+		// we then lock the cash register, and unlock all other items and decorations. we set tutorialComplete = true, so it'll no longer run.
+		// we then save these changes. instead of cleaning up all of the variables that were set during the tutorial, we just restart.
+		// since the title screen is skipped on next start, the player can't tell the game even restarted.
 	})
 }
 
