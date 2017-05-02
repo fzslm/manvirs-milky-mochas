@@ -13,37 +13,46 @@
 		<link rel="stylesheet" href="styles/ui.css" type="text/css" />
 		<link rel="stylesheet" href="styles/gameplay.css" type="text/css" />
 		<link rel="stylesheet" href="assets/fa/css/font-awesome.min.css" type="text/css" />
+		<!-- the stylesheets above are used for:
+
+				* including fonts (amaranth.css)
+				* structuring the DIVs so they all have the right sizes and positions (common/ui/gameplay .css)
+				* including font awesome, used for glyphs throughout the game
+
+		-->
 	</head>
 	<body>
 		<div class="container">
 
 			<div class="modalContainer" style="display: none">
-
+				<!-- this is empty here, but a DIV is added to this when a modal is displayed. this is done when the player enters their name/shop name. -->
 			</div>
 
 			<div class="trayContainer" style="display: none">
 				<button class="imageButton" id="trayButton" style="bottom:32px;left:32px;background:url('assets/common/addItem.png');z-index: 1;" onclick="_f.game.toggleTray();"></button>
 				<!-- i was going to create a new container div and put this in there, however creating a new div would prevent clicks from working as it'd block everything underneath -->
-				<div class="tray" closed="true" style="display: none">
+				<div class="tray" closed="true" style="display: none"> <!-- code inside this DIV is used for the tray. -->
 					<div class="trayOptions">
 						<ul>
+							<!-- a list containing tray options. these are displayed when the tray is opened. -->
 							<li id="items" class="active"><i id="items"class="fa fa-fw fa-fs fa-archive"></i></li>
 							<li id="decorate"><i id="decorate" class="fa fa-fw fa-fs fa-paint-brush"></i></li>
 						</ul>
 					</div>
 					<div class="trayMainView">
-						<div class="trayView" id="trayView-items"></div>
-						<div class="trayView" style="display: none;" id="trayView-decorate"></div>
+						<!-- this is the main view for the tray. this contains all of the actual content for the tray. -->
+						<div class="trayView" id="trayView-items"></div>	<!-- this DIV is used for the item list -->
+						<div class="trayView" style="display: none;" id="trayView-decorate"></div> <!-- this one is used to display the decorations list -->
 					</div>
 				</div>
 			</div>
 
 			<div class="content">
-
+				<!-- views (like title screen / minigame / main gameplay) are loaded here. -->
 			</div>
 
 			<div class="vignette">
-
+				<!-- only displays when a modal is on-screen. used to accentuate modals when they appear (make them easier to see). -->
 			</div>
 
 		</div>
