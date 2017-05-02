@@ -3,13 +3,18 @@ var gameSave = {};
 
 var _f = {
 	music: {
-		currentlyPlayingBGM: false,
+
+		// the music object - contains modules and attributes relating to music and SFX playback.
+
+		currentlyPlayingBGM: false,			// this boolean variable states whether or not music is playing.
 		changeBGM: function(bgm) {
 			if(!bgm) {
+				// if no BGM is passed, stop playing.
 				console.log('Stopping BGM');
 				_f.music.currentlyPlayingBGM.stop();
 				_f.music.currentlyPlayingBGM = false;
 			} else {
+				// otherwise, change the track.
 				console.log('Changing BGM track to assets/bgm/'+bgm+'.ogg');
 				try{
 					_f.music.currentlyPlayingBGM.stop();
@@ -21,7 +26,7 @@ var _f = {
 					// using a try/catch block ignores this failure and continues.
 				}
 				_f.music.currentlyPlayingBGM = new Howl({src: 'assets/bgm/'+bgm+'.ogg', loop: true});
-				_f.music.currentlyPlayingBGM.play();
+				_f.music.currentlyPlayingBGM.play();		// play the new BGM from the specified source
 			}
 		},
 
@@ -40,40 +45,42 @@ var _f = {
 	},
 
 	system: {
-
+		// the system block of foundation. manages things like saving, starting the game, unhandled exceptions, etc.
 		loadSave: function() {
+			// loads the save file from save.json into the gameSave variable.
 			console.log('Loading game...');
 			gameSave = jsonfile.readFileSync('peony/save.json');
 		},
 
 		newSave: function() {
+			// creates a new save file.
 			console.log('Creating new save...');
 			gameSave = {
-				"playerName": "",
-				"shopName": "",
-				"started": false,
-				"tutorialComplete": false,
-				"money": 1,
-				"level": 1,
-				"shop": [],
-				"shopWidth": 2560,
-				"unlockedItems": [true, false, false, false],
-				"unlockedDecorations": [false, false, false, false],
-				"purchasedDecorations": [true, false, false, false],
-				"currentDecoration": "shop0",
-				"lastPlayed": Date.now()
-			};
-			jsonfile.writeFileSync('peony/save.json', gameSave);
+				"playerName": "",	// no player name by default
+				"shopName": "",		// no shop name by default
+				"started": false,	// started == false, causes the player to be prompted for their name when they start.
+				"tutorialComplete": false,	// set to false so the tutorial starts when the player starts for the first time.
+				"money": 1,			// the player has $1 by default.
+				"level": 1,			// the level of the player, unused.
+				"shop": [],			// this array will contain all item objects - each object will represent an item to be drawn to display.
+				"shopWidth": 2560,		// the width of the shop, in px.
+				"unlockedItems": [true, false, false, false],			// unlocked items. the index of the boolean variable in this array represents the item's unlocked state. so unlockedItems[0]==false would mean that Item ID 0 is locked.
+				"unlockedDecorations": [false, false, false, false],	// unlocked decorations, as above.
+				"purchasedDecorations": [true, false, false, false],	// decorations that the player has already bought. as above.
+				"currentDecoration": "shop0",		// the default decoration (Decrepit)
+				"lastPlayed": Date.now()			// sets last played to the current time. unused.
+			};		// the default save file contents.
+			jsonfile.writeFileSync('peony/save.json', gameSave); 	// writes the default game save to disk. (i.e. creating a new save file)
 		},
 
 		save: function() {
 			console.log('Saving game...');
-			jsonfile.writeFileSync('peony/save.json', gameSave);
+			jsonfile.writeFileSync('peony/save.json', gameSave);	// save gameSave to disk.
 		},
 
 		start: function(){
 			_f.window.scaleUx(); // scale the UI to fit the screen
-			// let's draw a loading wheel on the screen first!
+			// draw a loading wheel on the screen first
 			$('.content').append('<div class="game-loading"><i class="fa fa-cog fa-spin"></i> Loading</div>');
 			// check for user's save game
 			fs.exists('peony/save.json', function(res){
@@ -104,31 +111,34 @@ var _f = {
 	},
 
 	ui: {
+		// contains code for modal (dialog boxes).
 		modal: {
 			push: function(title, contents, actions) {
 
-				$('.vignette').fadeIn();
+				$('.vignette').fadeIn();	// display the vignette, to make the modal easier to see.
 
-				$('.modalContainer').show();
+				$('.modalContainer').show();	// shows the modal container (which is where the modal will be added.)
 
-				actionsHtml = "";
+				actionsHtml = "";		// actionsHtml = a representation of the passed actions as HTML DIVs/buttons. This is empty by default.
 				actions.forEach(function(res){
+					// for each action that is passed to the push method, add a new DIV to actionsHtml.
 					actionEscaped = res.action.replace(/\"/g,'&quot;');
 					actionsHtml = actionsHtml + '<li class="modal-action" onclick="'+actionEscaped+'">'+res.name+'</li>';
 				});
 
 				$('.modalContainer').prepend('<div class="modal" style="display: none"><div class="modal-title">'+title+'</div><div class="modal-contents">'+contents+'</div><ul class="modal-actions">'+actionsHtml+'</ul></div>');
-				_f.music.playSFX('modal');
-				$('.modal').effect('slide', {direction: 'down', duration: 350, mode: 'show'});
+				// add the modal with the set title, contents and actionsHtml, which was populated above. style="display: none" causes it to be hidden, allowing us to add an entry animation.
+				_f.music.playSFX('modal');		// play the modal sound effect
+				$('.modal').effect('slide', {direction: 'down', duration: 350, mode: 'show'}); // then show the modal.
 			},
 
 			dismiss: function(callback){
-				$('.vignette').fadeOut();
+				$('.vignette').fadeOut();	// fades out the vignette layer.
 				$('.modal').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, function(){
-					$('.modal').remove();
-					$('.modalContainer').hide();
+					$('.modal').remove();				// removes the modal from the display.
+					$('.modalContainer').hide();	// and hides the container
 				});
-				if(callback) callback();
+				if(callback) callback();	// if a callback (function to run next) was given to this method, run it.
 			}
 		}
 	},
@@ -137,10 +147,10 @@ var _f = {
 
 		loadView: function(view, data) {
 			// loads a HTML file into the content div.
-			$('.content').fadeOut(function(){
+			$('.content').fadeOut(function(){	 // fade out the content DIV.
 				$('*').off(); /* disables all key + click bindings from previous view */
-				$('.content').html(fs.readFileSync('peony/views/'+view+'.html', 'utf-8'));
-				$('.content').fadeIn();
+				$('.content').html(fs.readFileSync('peony/views/'+view+'.html', 'utf-8'));		// reads the file into the content DIV.
+				$('.content').fadeIn();		// and fade in the content DIV.
 			});
 		}
 
@@ -151,9 +161,12 @@ var _f = {
 			// shows an NPC speaking certain message(s)
 			messages = ["Welcome to MANVIR'S MILKY MOCHAS, "+gameSave.playerName+"! To continue, click the speech bubble.", "I'm <em>so</em> glad to have you on board. I've run this coffee shop for 15 years now, but I'm getting far too tired now. I've got OTHER projects to devote my time and energy to - after all, I'm <strong>MANVIR</strong>!", "<em>clears throat</em> Oh, excuse me! I don't know what became of me there. Let's take a quick look at your new coffee shop, shall we?", "Oh, I forgot to mention. The repo men came the other day and they took all of the furniture. They even took the carpet. That means <em>you'll</em> have to do all the work.", "Now, one small technicality. While I'd love for you to be able to use the prestigious MANVIR'S MILKY MOCHAS name for your shop, it turns out that for... tax evasion purposes, you'll need to pick a different name.", "<strong>"+gameSave.shopName+"</strong>? Hmm... it's no <strong>MANVIR'S MILKY MOCHAS</strong>, but I guess we've got no other options. We'll use it.", "Before you can start up your coffee shop, you need to get a cash register! Don't worry, I'll pay for this. Let's go through how to add an item.", "First, click the [+] button in the bottom-left.", "Nice work, "+gameSave.playerName+". You pressed a button. Now you just need to click the <em>Cash Register</em> and choose <em>Confirm Purchase</em>.", "There's your cash register. Now you can start stealing the money of unsuspecting coffee aficionados everywhere.", "<strong>WHAT?</strong> I <strong>specifically</strong> said NO customers today! Oh, I'm angry. And you wouldn't like me when I'm angry.","<em>sighs</em> Well, I suppose I will have to teach you how to make coffee!", "You'll know you have a customer when you see that little dollar sign in the bottom-right corner. Tap it to ask the customer what they want!", "He-he-he!", "Yeah, these guys are <small>really</small> particular about their coffee. It drives me insane. There's this one guy who always asks for tons of milk. Says it adds extra lactose or something like that...", "Anyway, never mind about that. Hope you remembered what that guy just ordered, because I'm not reminding you. Let's make some coffee!", "<em>slurp</em>", "This coffee is amazing! It's exactly what I wanted!", "...Wow! I wasn't expecting it to be this good!", "Oh my god! It's perfect!", "Yeah! This is real coffee!", "Wow! This is incredible!", "...Mmm! This is good!", "This is nice! I'd certainly drink this again!", "Mmm! This is some damn fine coffee!", "I'm impressed, $PLAYERNAME! This tastes great!", "Nice work! This is a great coffee!", "...Ehh... I suppose it's alright. I've certainly had better.", "... It could be worse, but it could definitely be better...", "Coffee's coffee, but I don't know about this one...", "It has potential, but I think something's missing...", "...I guess it's drinkable. The question is - do I <em>really</em> want to drink it?", "... $PLAYERNAME, I know you're new and all that, but come on now. This is awful.", "Did you even add the coffee beans, $PLAYERNAME? Because I can barely taste them.", "What's in this? It's just that I don't think I like it very much.", "... Ugh! This is really bad.", "... I'm not paying for this. I genuinely think I'm going to throw up everywhere.", "Are you trying to kill me or something? This is some of the worst coffee I've ever had in my life. In fact, no, I think it <em>is</em> the worst.", "I don't feel well. Is there a hospital near here? It's just that I think I have food poisoning now, $PLAYERNAME. And if it turns out I do, I'm suing you.", "Well, there goes the prestige of what was once <strong>MANVIR'S MILKY MOCHAS</strong>. Don't expect me to be back here again.", "Can I ask a quick question? How exactly did you screw up this bad?", "The money you make from a coffee depends on how well you made it. If you made it bad enough, you might not make any money at all. So don't screw it up!", "The amount of money you have shows up in the top-right corner of your screen. And -- wait. You only have $MONEY? I guess I could help you out... if you do me a favour.", "Recently I've been running into some issues with the law. They seem to think they can make <strong>MANVIR</strong> pay his bills and his loans!", "So the bank men came out the other day and they took all of my furniture. Like I said, they even took the carpet! And needless to say, I'm less than pleased.", "I've got a great plan to show them who's boss, but it requires me to leave this branch behind. Would you be willing to take ownership of this place?", "Oh wait, you haven't got a choice. Congratulations - this place is yours! Now, here's $1000 to start you off. Spend it wisely, 'cause I won't be helping you out again!", "Right, before I let you go off on your own, there's one last thing I want you to do. Let's change the decorations.", "Changing the decorations will change the floor and the wall! So you can make my, erm, I mean <em>your</em> coffee shop look exactly how you want.", "After I'm done teaching you, you'll even be able to add furniture like tables and chairs. Doing so will make your coffee shop more popular, and might encourage more people to come. Wouldn't that be nice!", "Right - let's change the decorations. Press the [+] button, but this time go to the tab with the paintbrush. Then, choose a decoration!", "There you go. You've changed the decoration of my store now! Which means -- you're done! You're ready to start running $SHOPNAME!", "I'll pop back in from time to time to see how you're doing, of course. But yeah, we're done with this tutorial now! Click the speech bubble to save, and start the <em>real</em> Manvir's Milky Mochas. The game has only just begun!"];
 
+			/* ^^^ these are messages spoken by the various NPCs in the game. ^^^ */
+
 			_f.game.npcSpeechCallback = callback;
 
 			if(typeof(npc) == "object") {
+				// if the NPC is an object (has been randomly generated), load all of the body parts (head/pants/body/shoes) using the array that was passed.
 				$('.npcLayer').html('<div style="background-image: url(\'assets/npc/head'+npc[0]+'.png\')" class="npcHead"></div><div style="background-image: url(\'assets/npc/body'+npc[1]+'.png\')" class="npcBody"></div><div style="background-image: url(\'assets/npc/legs'+npc[2]+'.png\')" class="npcLegs"></div><div style="background-image: url(\'assets/npc/boots'+npc[3]+'.png\')" class="npcBoots"></div>');
 			} else {
 				// load NPC image from string
@@ -181,17 +194,17 @@ var _f = {
 
 
 
-			$('.item').hide();
-			$('#npcSpeechItem0').show();
+			$('.item').hide();			// hide all items (they display above the speech layer otherwise. we show them again in the dismiss method)
+			$('#npcSpeechItem0').show();		// shows the first message in the series.
 
-			$('.npcImage').hide(); $('.npcSpeech').hide();
-			$('.npcLayer').show();
-			$('.npcImage').effect('slide', {direction: 'right', duration: 150, mode: 'show'});
+			$('.npcImage').hide(); $('.npcSpeech').hide();			// hides both the image/speech bubble, as we'll animate them in below.
+			$('.npcLayer').show();	// shows the NPC speech layer
+			$('.npcImage').effect('slide', {direction: 'right', duration: 150, mode: 'show'});  // animate the image/speech bubble
 			$('.npcSpeech').effect('slide', {direction: 'left', duration: 150, mode: 'show'});
 
 		},
 
-		currentNPCArray: [],
+		currentNPCArray: [],		// the NPC that just ordered coffee. empty until a customer arrives.
 
 		npcSpeechAdvance: function() {
 			// advance the speech bubble or dismiss it, based on the amount of messages left
@@ -214,7 +227,7 @@ var _f = {
 
 		},
 
-		npcSpeechCallback: function() {},
+		npcSpeechCallback: function() {},			// a callback to be executed after the NPC is done talking. the callback is stored here when an NPC instance is spawned.
 
 		judgeCoffee: function(desiredBeans, desiredSize, desiredMilk, desiredExtras) {
 			// a score is assigned to the user when they make a coffee, as a percentage between 0 - 100.
@@ -282,20 +295,20 @@ var _f = {
 			// 60% - 80%: GOOD, $7.00 paid
 			// 80% - 100%: AMAZING, $14.00 paid
 
-			var messageIndex = false;
-			var changeMoneyBy = false;
+			var messageIndex = false;			// the message to display. this is an integer representing an index in the messages array above. set to false until it is set in one of the cases below.
+			var changeMoneyBy = false;		// how much money to pay. set to false until set otherwise below.
 			switch(true){
-				case (score < 20):
+				case (score < 20):					// if the score is less than 20%, awful - no payment.
 					messageIndex = _f.misc.randomIntFromInterval(36, 40);
 					changeMoneyBy = 0;
 					break;
-				case (score < 40):
+				case (score < 40):					// if it's between 20% - 40% - bad. (uses the percentages above.)
 					messageIndex = _f.misc.randomIntFromInterval(32, 36);
 					changeMoneyBy = 2.00;
 					break;
 				case (score < 60):
-					messageIndex = _f.misc.randomIntFromInterval(27, 31);
-					changeMoneyBy = 3.50;
+					messageIndex = _f.misc.randomIntFromInterval(27, 31);		// chooses a random message index. all indices between 27 - 31 are messages for an "average" coffee, in this case
+					changeMoneyBy = 3.50;		// add the amount for an average coffee
 					break;
 				case (score < 80):
 					messageIndex = _f.misc.randomIntFromInterval(22, 26);
@@ -307,12 +320,12 @@ var _f = {
 					break;
 			}
 
-			_f.game.npcSpeech(npc, [messageIndex], function(){
-				if(changeMoneyBy !== 0) {
-					_f.game.changeMoney(changeMoneyBy);
+			_f.game.npcSpeech(npc, [messageIndex], function(){		// speak the message that we determined above
+				if(changeMoneyBy !== 0) {		// if the player earned any money at all:
+					_f.game.changeMoney(changeMoneyBy);		// change money by the determined amount (AFTER the player dismisses the speech bubble we just spawned)
 				}
 					try{
-						callback();
+						callback();			// run a callback if there is one
 					} catch(e) {
 
 					}
@@ -322,25 +335,25 @@ var _f = {
 		updateName: function(name) {
 			// sets the user's name
 			gameSave.playerName = name;
-			_f.system.save();
+			_f.system.save();		// saves it to disk
 		},
 
 		toggleTray: function(callback) {
 			_f.music.playSFX('zip');
 			if($('.tray').attr('closed') == "true") {
 				// tray is closed, open it
-				_f.game.refreshItemStore();
-				_f.game.refreshDecorationStore();
-				$('.tray').attr('closed', 'false');
-				$('#trayButton').css('background', "url('assets/common/back.png')");
-				$('.trayContainer').show();
-				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'show'}, callback);
+				_f.game.refreshItemStore();	// refresh items in the tray.
+				_f.game.refreshDecorationStore();	// refresh decorations.
+				$('.tray').attr('closed', 'false');			// set the "closed" attribute for tray to false (i.e. the tray is open)
+				$('#trayButton').css('background', "url('assets/common/back.png')");		// changes the tray button icon so it indicates closing rather than opening
+				$('.trayContainer').show();			// shows the tray container...
+				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'show'}, callback);	// and then animate the tray in
 			} else {
 				// tray is open, close it
-				$('.tray').attr('closed', 'true');
-				$('#trayButton').css('background', "url('assets/common/addItem.png')");
-				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, function(){
-				$('.trayContainer').hide();
+				$('.tray').attr('closed', 'true');	// set closed attribute to true (i.e. the tray is closed.)
+				$('#trayButton').css('background', "url('assets/common/addItem.png')");		// changes the tray button icon back to indicate opening
+				$('.tray').effect('slide', {direction: 'down', duration: 350, mode: 'hide'}, function(){			// animate the tray away
+				$('.trayContainer').hide();		// hides the container.
 				try{
 					callback();
 				} catch(err) {
@@ -351,91 +364,92 @@ var _f = {
 		},
 
 		refreshItemStore: function() {
-			var listHtml = "";
+			var listHtml = "";			// listHTML is the list of items that need to be added to the tray.
 			itemDefinitions.forEach(function(res, i){
 				if(gameSave.unlockedItems[i]){
+					// for every item that the player has unlocked, add a list element to listHTML.
 					listHtml = listHtml + '<li onclick="_f.game.confirmBuy('+i+')" id="item'+i+'" class="itemElement"><div class="itemImage" style="background: url(\''+res.image+'\')"></div><div class="itemDetails"><span class="itemName">'+res.name+'</span><span class="itemDescription">'+res.description+' <span style="color: grey; padding-left: 2px;font-size: 32px">($'+res.price+')</span></span></div></li>';
 				}
 
 			});
-			$('#trayView-items').html('<ul class="itemsList">'+listHtml+'</ul>');
+			$('#trayView-items').html('<ul class="itemsList">'+listHtml+'</ul>');		// and then set the items list to the contents of listHTML.
 		},
 
 		confirmBuy: function(id) {
-			$('.buyButton').remove();
-			$('li#item'+id).append('<div onclick="_f.game.purchaseItem('+id+')" class="buyButton">Confirm Purchase</div>');
+			// adds a "CONFIRM PURCHASE" button to an item's entry in the shop list, given its ID. This is usually invoked when said item is tapped, to confirm the player's input was intentional.
+			$('.buyButton').remove();		// hides any other confirm buttons
+			$('li#item'+id).append('<div onclick="_f.game.purchaseItem('+id+')" class="buyButton">Confirm Purchase</div>');		// and draws one under the given item
 		},
 
 		purchaseItem: function(id, calledFromTutorial) {
-			$('.buyButton').remove();
-			if(itemDefinitions[id].price > gameSave.money) {
-				alert("You don't have enough money to buy that!");
+			// confirm purchase was pressed.
+			$('.buyButton').remove();	// remove the confirm button.
+			if(itemDefinitions[id].price > gameSave.money) {		// if they don't have enough money
+				alert("You don't have enough money to buy that!");	// then block the purchase
 			} else {
-				if(!calledFromTutorial) _f.game.toggleTray();
-				gameSave.shop.push(new Item(id));
-				_f.game.changeMoney(-itemDefinitions[id].price);
-				_f.system.save();
+				if(!calledFromTutorial) _f.game.toggleTray();		// close the tray if this wasn't done in the tutorial. this is needed because the tutorial closes the tray, and toggling the tray twice causes it to remain open - and this is undesirable.
+				gameSave.shop.push(new Item(id));								// adds a new instance of the purchased item to the game save.
+				_f.game.changeMoney(-itemDefinitions[id].price);		// changes money by the amount the item costs.
+				_f.system.save();		// and save.
 			}
 
 		},
 
 		destroyItem: function(uuid){
-			_f.music.playSFX('poof');
-			$('#item-'+uuid).remove();
-			var newShopArray = [];
-			gameSave.shop.forEach(function(res){
-				if(res.uuid != uuid) {
-					newShopArray.push(res);
+			_f.music.playSFX('poof');		// play the "poof" sound effect when a item is destroyed.
+			$('#item-'+uuid).remove();	// remove it from the game stage
+			var newShopArray = [];										// start creating a new shop array
+			gameSave.shop.forEach(function(res){			// for every item in the shop array that isn't the one that was just removed,
+				if(res.uuid != uuid) {									// add it to the new shop array.
+					newShopArray.push(res);								// this effectively creates a new shop array "newShopArray" which contains all items except the one that we deleted.
 				}
 			});
-			gameSave.shop = newShopArray;
-			_f.system.save();
+			gameSave.shop = newShopArray;							// change the shop array in the save file to the new one we just made, effectively removing the item completely from the game.
+			_f.system.save();			// and save.
 		},
 
 		sellItem: function(uuid) {
-			var itemReference = _f.game.getItemFromUUID(uuid);
-			console.log(itemReference);
-			_f.game.changeMoney((itemReference.price / 4 ) * 3);
-			_f.game.destroyItem(uuid);
+			var itemReference = _f.game.getItemFromUUID(uuid);			// get the item object from the UUID.
+			_f.game.changeMoney((itemReference.price / 4 ) * 3);		// refund 3/4 of the original price to the wallet
+			_f.game.destroyItem(uuid);															// and destroy the item using the procedure above.
 		},
 
 		changeMoney: function(amount) {
-			_f.music.playSFX('money-change');
-			console.log('changing by '+amount);
-			gameSave.money = gameSave.money + amount;
-			_f.game.updateMoneyHud();
-			_f.system.save();
+			_f.music.playSFX('money-change');												// play the "ka-ching!" sound effect
+			gameSave.money = gameSave.money + amount;								// add "amount" to the wallet. we can change the money by a negative amount by passing a negative value here.
+			_f.game.updateMoneyHud();																// update the money HUD so it is up to date/in sync with the amount the player has.
+			_f.system.save();																				// and save.
 		},
 
 		getItemFromUUID: function(uuid) {
-			var returnValue = false;
-			gameSave.shop.forEach(function(res){
-				if(res.uuid == uuid) {
+			var returnValue = false;								// this is the default return value. (false) meaning that no item was found with a given UUID.
+			gameSave.shop.forEach(function(res){		// for each item in the shop array...
+				if(res.uuid == uuid) {										// if a match is found with the given UUID, return that object.
 					returnValue = res;
 				}
 			});
-			return returnValue;
+			return returnValue;					// return the object if one was found, or "false" if none was.
 		},
 
 		flipItem: function(uuid){
-			_f.music.playSFX('flip');
-			var itemReference = _f.game.getItemFromUUID(uuid);
-			if(itemReference.flipped === 0) {
-				itemReference.flipped = 1;
-				$('#item-'+uuid).css('transform', 'scaleX(-1)');
+			_f.music.playSFX('flip');			// play the "flip" sound effect
+			var itemReference = _f.game.getItemFromUUID(uuid);		// get the item object from the UUID
+			if(itemReference.flipped === 0) {				// toggle between itemReference.flipped (0/1)
+				itemReference.flipped = 1;			// flipped is set to yes.
+				$('#item-'+uuid).css('transform', 'scaleX(-1)');	// this makes the item display flipped.
 			} else {
-				itemReference.flipped = 0;
-				$('#item-'+uuid).css('transform', 'scaleX(1)');
+				itemReference.flipped = 0;			// flipped is set to no.
+				$('#item-'+uuid).css('transform', 'scaleX(1)');		// this makes the item display normally.
 			}
-			_f.system.save();
+			_f.system.save();		// save after this change is made.
 		},
 
 		moveItem: function(uuid){
-			_f.music.playSFX('move-init');
-			$(document).on('mousemove', function(event){
+			_f.music.playSFX('move-init');				// play the "grunt" noise - to represent the item being lifted.
+			$(document).on('mousemove', function(event){	// every time the mouse moves, run the code below.
 
 				if(sizeOf('peony/assets/'+gameSave.currentDecoration+'/p1.png').width < event.pageX+$('.content').scrollLeft() && (sizeOf('peony/assets/'+gameSave.currentDecoration+'/p3.png').width+gameSave.shopWidth) > event.pageX+$('.content').scrollLeft()) {
-
+					// if the mouse is within the boundaries of the game, then make the item follow the mouse.
 					$('#item-'+uuid).css('left', event.pageX+$('.content').scrollLeft()-($('#item-'+uuid).width()/2)+'px');
 
 				}
@@ -443,19 +457,21 @@ var _f = {
 			});
 
 			$('#item-'+uuid).click(function(event){
-				$(document).off('mousemove');
-				_f.music.playSFX('move-done');
-				var itemReference = _f.game.getItemFromUUID(uuid);
-				itemReference.position[0] = $('#item-'+uuid).position().left;
-				_f.system.save();
+				// the mouse was clicked, so we stop moving the item and save the current xposition.
+				$(document).off('mousemove');			// stop tracking the mouse's movement.
+				_f.music.playSFX('move-done');	// play a sound to represent the item being dropped.
+				var itemReference = _f.game.getItemFromUUID(uuid);			// get the item object
+				itemReference.position[0] = $('#item-'+uuid).position().left;		// and change the position of it to the current xposition.
+				_f.system.save();	// then save that position.
 			});
 		},
 
 		updateMoneyHud: function() {
-			$('.moneyText').text('$'+gameSave.money.toFixed(2));
+			$('.moneyText').text('$'+gameSave.money.toFixed(2));			// get the value of gameSave.money, round it to two decimal places, and set the text of the money HUD to the resultant value.
 		},
 
 		refreshDecorationStore: function() {
+			// identical to refreshItemStore, but checks decorations instead.
 			var listHtml = "";
 			var onclick = "";
 			decorationDefinitions.forEach(function(res, i){
@@ -477,11 +493,13 @@ var _f = {
 		},
 
 		confirmDecorationBuy: function(id) {
+			// identical to confirmBuy but for decorations
 			$('.buyButton').remove();
 			$('li#item'+id).append('<div onclick="_f.game.purchaseDecoration('+id+')" class="buyButton">Confirm Purchase</div>');
 		},
 
 		purchaseDecoration: function(id, callback) {
+			// idential to purchaseItem but for decorations
 			$('.buyButton').remove();
 			gameSave.purchasedDecorations[id] = true;
 			if(decorationDefinitions[id].price > gameSave.money) {
@@ -494,38 +512,42 @@ var _f = {
 				if(gameSave.tutorialComplete) {
 					_f.game.toggleTray();
 				} else {
-					tutorialEnding();
+					tutorialEnding();		// if the tutorial isn't complete, finish it now (as buying a decoration is the last part of the tutorial.)
 				}
 			}
 		},
 
 		applyDecoration: function(id) {
-			gameSave.currentDecoration = "shop"+id;
-			_f.game.refreshDecoration();
+			// change the decoration to the one with the given ID.
+			gameSave.currentDecoration = "shop"+id;				// change the variable in gameSave which stores the current decoration to e.g. shop0 if id=0
+			_f.game.refreshDecoration();	// refresh the decoration so that is displayed.
+			_f.system.save(); // save this change
 		},
 
 		refreshDecoration: function(){
-			$('.viewContent').css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p2.png")');
+			$('.viewContent').css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p2.png")');			// set the background to part 2 of the shop background. (this is the looping part of the shop assets)
 
-			var widthPre = sizeOf('peony/assets/'+gameSave.currentDecoration+'/p1.png').width;
-			$('.shop-pre').css('min-width', widthPre).css('max-width', widthPre).css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p1.png")');
+			var widthPre = sizeOf('peony/assets/'+gameSave.currentDecoration+'/p1.png').width;			// calculate the width of part 1 of the shop background.
+			$('.shop-pre').css('min-width', widthPre).css('max-width', widthPre).css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p1.png")');		// set shop-pre to have the part 1 as its background image, with the calculated width.
 
-			var widthPost = sizeOf('peony/assets/'+gameSave.currentDecoration+'/p3.png').width;
+			var widthPost = sizeOf('peony/assets/'+gameSave.currentDecoration+'/p3.png').width;		// as above
 			$('.shop-post').css('min-width', widthPost).css('max-width', widthPost).css('background-image', 'url("assets/'+gameSave.currentDecoration+'/p3.png")');
 
-			$('.viewContent').css('min-width', gameSave.shopWidth+widthPost+widthPre+'px');
+			$('.viewContent').css('min-width', gameSave.shopWidth+widthPost+widthPre+'px');			// adjusts the widths of elements so that the shopwidth stored in the game save is actually available to the user.
 			$('.viewContent').css('max-width', gameSave.shopWidth+widthPost+widthPre+'px');
-			$('.viewContent').css('background-position-x', widthPre+'px');
+			$('.viewContent').css('background-position-x', widthPre+'px');										// starts the looping background /after/ part 1 is rendered, so it looks as intended.
 		},
 
 		returnRandomNPCArray: function(){
+			// returns a random NPC array, which is an array representing each body part of a NPC.
+			// essentially an array with four elements, each a random integer between 1/3, is returned.
 			return [_f.misc.randomIntFromInterval(1,3),_f.misc.randomIntFromInterval(1,3),_f.misc.randomIntFromInterval(1,3),_f.misc.randomIntFromInterval(1,3)];
 		}
 	},
 
 	misc: {
 		clock: function() {
-			/* returns the present time. */
+			/* returns the present time. was used in debugging, currently unused. */
 			var date = new Date();
 			var h = date.getHours();
 			var m = date.getMinutes();
@@ -545,6 +567,7 @@ var _f = {
 	},
 
 	window: {
+		// these are run when close/minimise/maximise are pressed.
 		close: function() {
 			gui.App.quit();
 		},
@@ -558,6 +581,7 @@ var _f = {
 		},
 
 		scaleUx: function() {
+			// ensures that the user interface is always scaled properly. this is discussed in greater depth in my development section.
 			var zoomPercent = 100;
 			if(win.width/1920 < win.height/1080) {
 				zoomPercent = (win.width / 1920) * 100;
@@ -572,11 +596,13 @@ var _f = {
 
 // LISTENERS //
 win.on('resize', function(){
-	_f.window.scaleUx();
+	// run every time the window is resized:
+	_f.window.scaleUx();		// rescale the window
 });
 
 $(document).ready(function(){
 	if(!_f.system.start()){
+		// run if the app failed to start. shouldn't ever happen.
 		alert('Failed to start.');
 	}
 });

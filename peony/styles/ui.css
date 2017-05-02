@@ -1,60 +1,11 @@
 * {
-	font-size: 48px;
-	font-family: 'Helvetica Neue'; /* changed typeface to something more... palatable */
-}
-
-button, input[type=button], input[type=submit], input[type=reset] {
-	/* button styles */
-}
-
-input[type=text], input[type=password], input[type=number] {
-	/* textbox styles */
-}
-
-input[type=range] {
-	-webkit-appearance: none;
-	margin: 24px 0;
-	width: 50%;
-	outline: none;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-	width: 100%;
-	height: 16.8px;
-	cursor: pointer;
-	animate: 0.2s;
-	background: #3071a9;
-}
-
-input[type=range]::-webkit-slider-thumb {
-	height: 48px;
-	width: 48px;
-	background: red;
-	cursor: pointer;
-	-webkit-appearance: none;
-	margin-top: -16px;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-	background: #367ebd;
-}
-
-
-textarea {
-	/* large text area styles */
-}
-
-select {
-	/* dropdown styles */
-}
-
-p {
-	/* standard text */
+	font-size: 48px;			/* min 48px for all text in the game, used as this /is/ a mobile game. makes everything readable. */
+	font-family: 'Helvetica Neue', sans-serif; /* changed typeface to something more... palatable */
 }
 
 button, input[type=button], input[type=submit], input[type=reset], input[type=text], input[type=password], input[type=number], textarea, select {
 	/* all UI elements */
-	padding: 16px;
+	padding: 16px;		/* add some padding so things are easier to press on mobile screens. */
 	border: 0;
 	outline: none;
 }
@@ -65,41 +16,41 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=te
 	width: 60%;
 	max-height: 720px;
 	min-height: 180px;
-	border-radius: 10px;
-	padding-bottom: 128px; /* this gives the modal actions more room. i am aware this is a shitty hack. */
+	/* sets the dimensions (height/width) for modal boxes. */
+	border-radius: 10px;	/* rounds the corners of the modal, for aesthetics */
+	padding-bottom: 128px; /* this gives the modal actions more room to be displayed properly. omitting this causes visual oddities */
 }
 
 .modal-title {
-	text-align: center;
-	margin: 16px;
-	font-size: 54px;
-    font-weight: 500;
-	color: rgb(240,240,240);
+	text-align: center;		/* center the title for modal boxes */
+	margin: 16px;					/* give them a margin so that they don't overlap with the contents of the modal */
+	font-size: 54px;			/* make the title big */
+    font-weight: 500;		/* and make it bold */
+	color: rgb(240,240,240);	/* sets the font color. */
 }
 
 .modal-contents {
 	text-align: center;
-	white-space: normal;
-	padding: 16px;
-	font-size: 32px;
-	/* removed scrolling, because no modal will ever need to scroll */
-	max-height: 520px;
+	white-space: normal;		/* forces the contents of the modal to wrap properly. */
+	padding: 16px;					/* adds 16px space between the modal and the contents of it */
+	font-size: 32px;				/* smaller than the title */
+	max-height: 520px;			/* sets a max height. beyond this, they will scroll */
 	color: rgb(240,240,240);
 }
 
 .modalContainer {
-	z-index: 99999999; /* TODO: Make this a more appropriate number!!! */
+	z-index: 99999999; /* a high z-index causes modals to always be displayed over everything else */
 }
 
 .trayContainer {
-	z-index: 99999999; /* TODO: Make this a more appropriate number!!! */
+	z-index: 99999999; /* as above, but with the tray. */
 }
 
 ul.modal-actions {
 	position: absolute;
-    bottom: 24px; /* looks prettier */
-    text-align: center;
-    width: 100%;
+    bottom: 24px; /* modal actions are 24px above the bottom of the modal. */
+    text-align: center;		/* centers them so that they look right */
+    width: 100%;			/* sets the width to 100% to fit as many buttons as possible*/
 }
 
 .modal-contents p {
@@ -108,20 +59,21 @@ ul.modal-actions {
 }
 
 li.modal-action {
-	display: inline-block;
-    padding: 12px 48px;
-	margin: 8px;
-    background-color: rgba(255,255,255,0.7);
-    border-radius: 4px;
+	display: inline-block;		/* uses inline-block to draw modal actions - so they're all on the same line */
+    padding: 12px 48px;			/* adds some space inside the buttons so that text looks less cramped */
+	margin: 8px;							/* adds some space between modal actions so they look less cramped */
+    background-color: rgba(255,255,255,0.7);			/* makes them white, with an opacity (alpha) of 0.7 */
+    border-radius: 4px;					/* rounds off the corners */
 }
 
 .game-loading {
-	position: fixed;
+	/* this shows at the bottom-right when the game is loading */
+	position: fixed;		/* always display 32px away from the bottom-right of the screen */
 	bottom: 32px;
 	right: 32px;
-	color: rgb(230,230,230);
-	background-color: rgb(40,40,40);
-	padding: 12px 36px;
+	color: rgb(230,230,230);			/* font color */
+	background-color: rgb(40,40,40);		/* sets the bg color */
+	padding: 12px 36px;		/* gives the loading text some padding. */
 
 }
 

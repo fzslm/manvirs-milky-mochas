@@ -1,31 +1,38 @@
-<link href="views/titleScreen.css" type="text/css" rel="stylesheet">
+<link href="views/titleScreen.css" type="text/css" rel="stylesheet">	<!-- loads styles for the title screen -->
+
 
 <script>
 	if(gameSave.skipTitle) {
-		gameSave.skipTitle = false; _f.system.save();
-		_f.views.loadView('gameplay');
+		// if skipTitle is set to true in the game savefile (i.e. the tutorial was just completed), then skip the title screen and just go ahead and start the game.
+		gameSave.skipTitle = false; _f.system.save();	// but first we need to set skipTitle back to false, so that the player is given the title screen next time they play.
+		_f.views.loadView('gameplay');	// then start the game
 	}
-	_f.music.changeBGM('menu');
+
+	// if skipTitle is false, run the rest of this code:
+
+	_f.music.changeBGM('menu');			// play the BGM for the main menu
 
 	function startGame(){
 		if(!gameSave.started) {
+			// if the player has never played the game before, ask them for their name.
 			_f.ui.modal.push('What\'s cookin\', good lookin\'?', '<p>Before I take you on MANVIR\'S WILD COFFEE SHOP RIDE, I need your name.</p><input type="text" id="name" name="name"></input>', [
 				{
 					"name": "OK",
-					"action": "gameSave.started = true; _f.system.save(); _f.ui.modal.dismiss(updateNameAndStart);"
+					"action": "gameSave.started = true; _f.system.save(); _f.ui.modal.dismiss(updateNameAndStart);"		// when they've entered their name, change started = true in the save file (don't ask for the name again), save it to disk and then start the tutorial.
 				}
 			]);
 		} else {
-			_f.views.loadView('gameplay');
+			_f.views.loadView('gameplay');			// start the game without asking their name if they've entered it before.
 		}
 	}
 
 	function updateNameAndStart() {
-		_f.game.updateName($('#name').val());
-		_f.views.loadView('gameplay');
+		_f.game.updateName($('#name').val());				// update the name in the save file
+		_f.views.loadView('gameplay');							// start the tutorial
 	}
 </script>
 
-<div class="viewContent" style="background-image: url('assets/title.png')">
+<div class="viewContent" style="background-image: url('assets/title.png')">	<!-- the background for the title screen -->
 	<button onclick="startGame();" class="absolute startGame">Let's get brewing</button>
+	<!-- pressing this button will start the startGame() function above. -->
 </div>

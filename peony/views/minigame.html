@@ -1,29 +1,34 @@
 <div class="viewContent">
 	<div class="beanSelect">
+		<!-- these DIVs relate to the bean selection screen. each of these buttons is mapped over the background image for this stage, and selects different beans for the coffee. -->
 		<button id="beans0" class="beans beans0"></button>
 		<button id="beans1" class="beans beans1"></button>
 		<button id="beans2" class="beans beans2"></button>
 		<button id="beans3" class="beans beans3"></button>
 	</div>
 	<div class="beanGrind">
-		<div class="counter">10</div>
+		<!-- this is the grinding minigame. -->
+		<div class="counter">10</div>			<!-- the counter that counts from 10 -> 0. When this is 0, this minigame is over. -->
 		<div class="beanGrindBean">
-
+			<!-- this DIV is used to display the bean icon that the player must tap to grind the beans. -->
 		</div>
-		<div class="progress-bar"></div>
+		<div class="progress-bar"></div> <!-- the progress bar that indicates the fineness of the beans. -->
 	</div>
 	<div class="cupSize">
+		<!-- the cup selection screen. like the bean selection - each div is mapped over the background image. -->
 		<button id="cup0" class="cup cup0"></button>
 		<button id="cup1" class="cup cup1"></button>
 		<button id="cup2" class="cup cup2"></button>
 	</div>
 	<div class="milking">
+		<!-- the milking minigame -->
 		<div class="udder">
-
+			<!-- this div is used to display the cow udder that the player must milk. -->
 		</div>
-		<div class="cupMilk cupMilk0"></div>
+		<div class="cupMilk cupMilk0"></div>	<!-- this cup is used to give the player a visual aid on how much milk the coffee contains. set to cupMilk0 (no milk) by default. -->
 	</div>
 	<div class="flavouring">
+		<!-- flavour select screen. like the bean select/cup select screens. -->
 		<button id="flavour0" class="flavour"></button>
 		<button id="flavour1" class="flavour"></button>
 		<button id="flavour2" class="flavour"></button>
@@ -33,7 +38,7 @@
 	</div>
 </div>
 
-<link href="views/minigame.css" type="text/css" rel="stylesheet">
+<link href="views/minigame.css" type="text/css" rel="stylesheet"> <!-- loads the styles needed to make everything on this view look right -->
 
 <script>
 
@@ -43,30 +48,31 @@
 		"size": false,
 		"milk": false,
 		"flavouring": [false, false, false, false, false, false]
-	}
+	} // instantiates the minigameScores object, which stores the player's progress in these minigames and is handed back to the main gameplay view.
 
-	_f.music.changeBGM('minigame');
+	_f.music.changeBGM('minigame');			// play the minigame music.
 
 	$('.beans').on('click', function(e){
-		minigameScores.beans = e.toElement.id.substring(5);
-		$('.beanSelect').fadeOut(500, function(){
-			$('.beanGrind').fadeIn(500, function(){
-				var grindBar = setInterval(function(){
-					if($('.progress-bar').width() > 0) {
+		minigameScores.beans = e.toElement.id.substring(5);			// stores the selected beans in the scores variable (0/1/2/3). the first 5 chars are removed from the ID of the selected button, so e.g. beans0 becomes 0.
+		$('.beanSelect').fadeOut(500, function(){								// after the beans are selected, fade out that view...
+			$('.beanGrind').fadeIn(500, function(){								// and fade in the grinding view
+				var grindBar = setInterval(function(){							// every 10ms, refresh the progress bar
+					if($('.progress-bar').width() > 0) {							// if the progress bar isn't depleted, remove 1px from its width. (causes it to slowly deplete)
 						$('.progress-bar').width($('.progress-bar').width()-1);
 					} else if($('.progress-bar').width() < 0) {
-						$('.progress-bar').width(0);
+						$('.progress-bar').width(0);										// if it is already empty, leave it.
 					}
 				}, 10)
 				var counter = setInterval(function(){
-					$('.counter').text( parseInt($('.counter').text())-1 );
+					$('.counter').text( parseInt($('.counter').text())-1 );					// every second, take away 1 from the counter.
 				}, 1000);
 				setTimeout(function(){
-					clearInterval(grindBar);
-					clearInterval(counter);
-					minigameScores.grind = ($('.progress-bar').width() / 1770) * 100;
-					$('.beanGrind').fadeOut(500, function(){
-						$('.cupSize').fadeIn(500);
+					// after 10s (i.e. the counter is zero)
+					clearInterval(grindBar);		// remove the code that changes the progress bar.
+					clearInterval(counter);			// remove the code that changes the counter.
+					minigameScores.grind = ($('.progress-bar').width() / 1770) * 100;				// converts the grinding progress bar to a percentage, and stores it in the grind variable in the scores object
+					$('.beanGrind').fadeOut(500, function(){			// fade out the bean grind minigame
+						$('.cupSize').fadeIn(500);		// fade in the cup selection screen.
 					})
 				}, 10000);
 			});
@@ -74,20 +80,22 @@
 	});
 
 	$('.beanGrindBean').on('click', function(){
-		_f.music.playSFX('grind');
+		// when the player clicks the bean on the grinding minigame:
+		_f.music.playSFX('grind');	// play the grinding sound
 
-		if($('.progress-bar').width()+100 < 1770) {
+		if($('.progress-bar').width()+100 < 1770) {	// if adding 100px to the progress bar won't cause it to be full, then add 100px.
 			$('.progress-bar').width($('.progress-bar').width()+100);
 		} else {
-			$('.progress-bar').width(1770);
+			$('.progress-bar').width(1770);	// otherwise, make it full. this stops the progress bar from 'leaking' (i.e. having a percentage fill of more than 100%.)
 		}
 	});
 
 	$('.cup').on('click', function(e) {
-		cupSize = e.toElement.id.substring(3);
-		minigameScores.size = cupSize;
-		$('.cupSize').fadeOut(500, function(){
-			$('.milking').fadeIn(500, function(){
+		// when the player chooses a cup
+		cupSize = e.toElement.id.substring(3);		// stores the cupsize as an integer. see the bean selection code above for an explanation on e.toElement.id.substring(x).
+		minigameScores.size = cupSize;	// stores that into the scores obj.
+		$('.cupSize').fadeOut(500, function(){		// fade out the cup selection screen
+			$('.milking').fadeIn(500, function(){	// fades in the milking game
 				milkAmount = 0;
 				expectedButtonPress = 0;
 				/* this is used in the milking minigame to determine which key press is expected.
@@ -149,14 +157,14 @@
 												_f.views.loadView('gameplay');
 											}
 										}
-										e.preventDefault();
+										e.preventDefault();		// prevents the key from doing anything else.
 									});
 
 								})
 							})
 						}
 				    }
-				    e.preventDefault();
+				    e.preventDefault();	// prevents enter from doing anything else.
 				});
 
 			})
