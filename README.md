@@ -1,5 +1,7 @@
 # manvir's milky mochas
 
+![icon](https://github.com/fzslm/manvirs-milky-mochas/raw/master/peony/assets/icon.png)
+
 *sighs*
 
 this one is gonna need a little bit of backstory.
@@ -16,7 +18,7 @@ then i put two and two together (it only took me four months of planning!) and i
 
 so yeah, that's how this abomination came to be. i couldn't be arsed to add multiplayer or even finish the game, so here it is in its pure shittiness. somehow i got a B from this so fuck i ain't complaining
 
-# BUGS
+## BUGS
 there are too many to mention them all, but here are a few of my faves!
 
 * font isn't right on non-Macs. a consequence of me neglecting to properly test on windows. as a result, it uses times new roman and looks like utter wank
