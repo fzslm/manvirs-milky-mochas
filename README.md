@@ -16,6 +16,12 @@ BUT
 
 then i put two and two together (it only took me four months of planning!) and i decided that instead of one of my friends being a coach to run you through building your coffee shop (cause she really liked coffee, so i thought it was fitting) i decided to use my sexual predator friend (note: not actually a sexual predator, pls no report) and base the game around him. this'd lead to all sorts of fun innuendos, i thought! like instead of there being actual cows milk in the coffee, you'd milk his... eh, i'm too ashamed of myself to continue.
 
+now, up to this point i actually hadn't written a single line of code. i remember exactly when i started writing it. i was at a party in February, and i was completely oblivious to the fact that my teacher wanted the completed project two weeks from then. a few drinks later, it kinda hit me, but i was too drunk to care. go me.
+
+i got home and fell asleep. i woke up the next day, not really hungover but not feeling too great either after the debaucherous events of the previous night. i started writing code on feb 14 (happy valentine's day to meeeee) and got it done a few days after that. how'd i manage to write the code so fast?
+
+about a year prior i had a project called Vapour (the corpse of which is actually on GitHub in a private repo!). it was a multimedia centre thing that was meant to be better than Kodi (since Kodi was pissing me off for some reason i cannot recall). it had extension support with a mostly done SDK and everything. so i just wrote this on top of that, stuck some of the code from that project into this one, and called it a day. that's why it didn't take me too long. it's also built using nwjs, html and **REALLY** bad javascript. like, atrociously bad. i'm scared that if anyone sees this they'll disassociate from me. it's __THAT__ bad.
+
 so yeah, that's how this abomination came to be. i couldn't be arsed to add multiplayer or even finish the game, so here it is in its pure shittiness. somehow i got a B from this so fuck i ain't complaining
 
 ## BUGS
