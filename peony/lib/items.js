@@ -52,6 +52,31 @@ var itemDefinitions = [
 		"image": "assets/plant-pot.png",
 		"shouldDraw": true,
 		"canMove": true
+
+	},
+	{
+		"name": "Kettle",
+		"description": "A water pot. A pot containing hot water. Kettle kettle, kettle kettle.",
+		"price": 50,
+		"canNPCInteract": false,
+		"state": "default",
+		"dimensions": [1000, 1000],
+		"position": [100,100],
+		"image": "assets/kettle.png",
+		"shouldDraw": true,
+		"canMove": true
+	},
+	{
+			"name": "Callie",
+			"description": "She is grace, she is beauty.",
+			"price": 100000,
+			"canNPCInteract": false,
+			"state": "default",
+			"dimensions": [1000, 1000],
+			"position": [100, 100],
+			"image": "assets/callie.jpg",
+			"shouldDraw": true,
+			"canMove": true
 	}
 ];
 
@@ -80,7 +105,6 @@ var decorationDefinitions = [
 		"price": 1500,
 		"internalName": "shop3"
 	}
-
 ];
 
 function Item(id) {
